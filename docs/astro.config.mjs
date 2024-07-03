@@ -5,7 +5,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://liquid-auth.algorand.foundation',
+  base: '/liquid-auth',
   integrations: [
     starlight({
       title: 'Liquid\nAuth',
@@ -20,6 +20,11 @@ export default defineConfig({
         label: 'Guides',
         autogenerate: {
           directory: 'guides'
+        }
+      },{
+        label: 'Architecture',
+        autogenerate: {
+          directory: 'architecture'
         }
       }, {
         label: 'Reference',
