@@ -1,5 +1,5 @@
 ---
-
+const base = import.meta.env.BASE_URL;
 ---
 <style>
 .liquid-purple-burst {
@@ -42,11 +42,11 @@
             Passkeys? Like there&apos;s no tomorrow<br/>
             Want to learn how we achieve this?<br/>
           </p>
-          <a href="/dive" class="px-10 py-2 text-md font-poppins leading-6 border-2 border-liquid-purple text-white">Deep Dive</a>
+          <a href={`${base}/dive`} class="px-10 py-2 text-md font-poppins leading-6 border-2 border-liquid-purple text-white">Deep Dive</a>
         </div>
       </div>
       <img
-        src="./auth_illustration.png"
+        src={`${base}/auth_illustration.png`}
         alt="Product screenshot"
         class="w-[48rem] place-self-end -translate-y-40 max-w-none sm:w-[40rem] md:-ml-4 lg:-ml-0"
         width="2432"
