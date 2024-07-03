@@ -5,7 +5,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://liquid-auth.algorand.foundation',
+  base: '/liquid-auth',
   integrations: [
     starlight({
       title: 'Liquid\nAuth',
