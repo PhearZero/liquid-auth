@@ -1,5 +1,12 @@
 ---
-title: Passkey Registration
+title: Authentication
+sidebar:
+  order: 1
+tags:
+    - Authentication
+    - Passkey
+    - FIDO2
+    - WebAuthn
 ---
 
 The service has two endpoints for Passkey registration with the following schema from the [OpenApi documentation](/reference/api):
