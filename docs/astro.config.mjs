@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import rehypeMermaid from "rehype-mermaid";
 import tailwind from "@astrojs/tailwind";
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,6 +17,15 @@ export default defineConfig({
       logo: {
         src: './public/logo.svg'
       },
+      plugins: [
+        starlightOpenAPI([
+          {
+            base: 'server/api',
+            label: 'Reference',
+            schema: 'https://liquid-auth.onrender.com/docs-json',
+          },
+        ]),
+        ],
       social: {
         github: 'https://github.com/algorandfoundation/liquid-auth'
       },
@@ -33,9 +43,25 @@ export default defineConfig({
       },{
         label: 'Server',
           collapsed: true,
-        autogenerate: {
-          directory: 'server'
-        }
+          items: [
+            {
+              label: 'Introduction',
+              link: '/server/introduction'
+            },
+            {
+              label: 'Running locally',
+              link: '/server/running-locally'
+            },
+            {
+              "label": "Configuration",
+              "link": "/server/environment-variables"
+            },
+            {
+              label: 'Integrations',
+              link: '/server/integrations'
+            },
+            ...openAPISidebarGroups
+          ]
       },
         {
           label: 'Clients',
