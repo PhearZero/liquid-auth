@@ -136,9 +136,121 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"docs": {
-"guides/deep-dive.md": {
-	id: "guides/deep-dive.md";
-  slug: "guides/deep-dive";
+"architecture.md": {
+	id: "architecture.md";
+  slug: "architecture";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/answer.md": {
+	id: "clients/android/answer.md";
+  slug: "clients/android/answer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/authentication.md": {
+	id: "clients/android/authentication.md";
+  slug: "clients/android/authentication";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/introduction.md": {
+	id: "clients/android/introduction.md";
+  slug: "clients/android/introduction";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/offer.md": {
+	id: "clients/android/offer.md";
+  slug: "clients/android/offer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/registration.md": {
+	id: "clients/android/registration.md";
+  slug: "clients/android/registration";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/answer.md": {
+	id: "clients/browser/answer.md";
+  slug: "clients/browser/answer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/authentication.md": {
+	id: "clients/browser/authentication.md";
+  slug: "clients/browser/authentication";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/example.md": {
+	id: "clients/browser/example.md";
+  slug: "clients/browser/example";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/introduction.md": {
+	id: "clients/browser/introduction.md";
+  slug: "clients/browser/introduction";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/offer.md": {
+	id: "clients/browser/offer.md";
+  slug: "clients/browser/offer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/registration.md": {
+	id: "clients/browser/registration.md";
+  slug: "clients/browser/registration";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"guides/Passkey/authentication.md": {
+	id: "guides/Passkey/authentication.md";
+  slug: "guides/passkey/authentication";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"guides/Passkey/registration.md": {
+	id: "guides/Passkey/registration.md";
+  slug: "guides/passkey/registration";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"guides/Peer to Peer/answer.md": {
+	id: "guides/Peer to Peer/answer.md";
+  slug: "guides/peer-to-peer/answer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"guides/Peer to Peer/offer.md": {
+	id: "guides/Peer to Peer/offer.md";
+  slug: "guides/peer-to-peer/offer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"guides/concepts.md": {
+	id: "guides/concepts.md";
+  slug: "guides/concepts";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -150,9 +262,9 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"guides/registration.md": {
-	id: "guides/registration.md";
-  slug: "guides/registration";
+"guides/qr-code.md": {
+	id: "guides/qr-code.md";
+  slug: "guides/qr-code";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -164,30 +276,30 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"reference/typescript/auth/README.md": {
-	id: "reference/typescript/auth/README.md";
-  slug: "reference/typescript/auth/readme";
+"server/environment-variables.md": {
+	id: "server/environment-variables.md";
+  slug: "server/environment-variables";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"reference/typescript/auth/attestation/functions/attestation.md": {
-	id: "reference/typescript/auth/attestation/functions/attestation.md";
-  slug: "reference/typescript/auth/attestation/functions/attestation";
+"server/integrations.md": {
+	id: "server/integrations.md";
+  slug: "server/integrations";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"reference/typescript/auth/attestation/functions/fetchAttestationRequest.md": {
-	id: "reference/typescript/auth/attestation/functions/fetchAttestationRequest.md";
-  slug: "reference/typescript/auth/attestation/functions/fetchattestationrequest";
+"server/introduction.md": {
+	id: "server/introduction.md";
+  slug: "server/introduction";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"reference/typescript/auth/attestation/functions/fetchAttestationResponse.md": {
-	id: "reference/typescript/auth/attestation/functions/fetchAttestationResponse.md";
-  slug: "reference/typescript/auth/attestation/functions/fetchattestationresponse";
+"server/running-locally.md": {
+	id: "server/running-locally.md";
+  slug: "server/running-locally";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

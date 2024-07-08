@@ -1,49 +1,39 @@
 ---
 title: Getting Started
+sidebar:
+  order: 0
 ---
 
-Liquid Auth is a self-hosted authentication service that provides a simple way to associate Passkeys to KeyPair(s) commonly found in cryptocurrencies.
+Liquid Auth is composed of two main components, the **Liquid Auth Server** and the **Liquid Auth Clients**.
+They are used together to provide authentication and signaling services for decentralized applications (dApps).
 
-## Running Locally
+### Server
 
-The Android authenticator requires a secure connection, make sure to run the service behind a valid certificate.
+The responsibilities of the service are limited to authentication and brokering connections between peers.
+Authentication is handled using [Passkeys](../concepts#passkeys) with a custom `Liquid Extension` 
+which attests an additional KeyPair (ie Algorand Account). 
+Once a client is authenticated, the service can be used to broker a [Peer to Peer](../concepts#peer-to-peer) connection.
 
-### SSL using [ngrok]()
-```bash
-ngrok http 3000
-```
+See the [Server Introduction](../../server/introduction) for more information.
 
+#### Who should use this service?
 
-### Running the Service
+The service should be deployed by decentralized applications
+that want to leverage `Passkeys` and `Signaling` between peers.
 
-To run Liquid Auth locally, you can use the following command:
+#### Why should I deploy this service?
 
-```
-#run.sh
-docker run -d -p 3000:3000 --env-file .docker.env liquid-auth:latest
-```
+The majority of communications on the internet are centralized. 
+**Liquid Auth Server** offloads communication from the server and allows for direct communication between peers.
+Not only is this generally more secure and decentralized, it also reduces the load on the server.
 
-#### Environment Variables
-```env
-#.docker.env
+### Clients
 
-# FIDO2
-RP_NAME=<SERVICE_NAME> # e.g. Liquid dApp
-HOSTNAME=<HOSTNAME> # e.g. my-liquid-auth-service.com or <ngrok-id>.ngrok.io
-ORIGIN=<ORIGIN> # e.g. https://my-liquid-auth-service.com or https://<ngrok-id>.ngrok.io
+The **Liquid Auth Clients** are libraries that provide a simple way to interact with the service and other peers.
+Clients use the service to authenticate and broker a connection between peers.
 
-# Database
-DB_HOST=<HOST>
-DB_USERNAME=<USER>
-DB_PASSWORD=<PASSWORD>
-DB_NAME=<NAME>
-DB_ATLAS=<true | false>
+Get started building with the [Android](../../clients/android/introduction) or [Browser](../../clients/browser/introduction) client
 
-# Events
-REDIS_HOST=<HOST>
-REDIS_PORT=<PORT>
-REDIS_USERNAME=<USER>
-REDIS_PASSWORD=<PASSWORD>
-```
+#### Who should use the clients?
 
-See more details about deployments in the [Server](/server/introduction) guide.
+The clients should be used by developers who want to integrate the **Liquid Auth Service** into their applications and wallets.

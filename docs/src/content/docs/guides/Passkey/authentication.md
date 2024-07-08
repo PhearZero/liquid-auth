@@ -1,5 +1,17 @@
 ---
-title: Passkey Registration
+title: Authentication Guide
+sidebar:
+  order: 10
+  label: Authentication
+  badge:
+    text: "WIP"
+    variant: caution
+tags:
+  - Passkey
+  - Registration
+  - Android
+  - Browser
+  - Server
 ---
 
 The service has two endpoints for Passkey registration with the following schema from the [OpenApi documentation](/reference/api):
