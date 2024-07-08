@@ -1,7 +1,7 @@
 ---
 title: Authentication Guide
 sidebar:
-  order: 10
+  order: 11
   label: Authentication
   badge:
     text: "WIP"
@@ -16,7 +16,6 @@ tags:
 
 The service has two endpoints for Passkey registration with the following schema from the [OpenApi documentation](/reference/api):
 
-<!-- todo: add the markdown from swagger -->
 
 - `POST /attestation/request` - Fetch PublicKeyCredentialCreationOptions
 - `POST /attestation/response` - Register a new Passkey using an AuthenticatorAttestationResponse
@@ -35,27 +34,27 @@ class MainActivity {
         .cookieJar(cookieJar) // Use Cookie jar to share cookies between requests
         .build()
     private var attestationApi = AttestationApi(httpClient)
-    
+
     private fun onCreate(){
         val origin = "https://my-liquid-auth-service.com"
-        
+
         val options = attestationApi.postAttestationOptions(
             origin, // Origin Server
             "User-Agent-String", // Required for checking the authenticator fingerprint
             JSONObject() // Additional Request Options
         )
-        
+
         // Handle the FIDO2 Intent in FIDO2Client or CredentialManager
         // This is a simplified version of the code
         val credential = PublicKeyCredential()
-        
+
         val response = attestationApi.postAttestationResponse(
             origin, // Origin Server
             "User-Agent-String", // Required for checking the authenticator fingerprint
             credential // PublicKeyCredential
         )
     }
-    
+
 }
 
 ```

@@ -220,20 +220,20 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"guides/Passkey/authentication.md": {
-	id: "guides/Passkey/authentication.md";
+"guides/Passkey/authentication.mdx": {
+	id: "guides/Passkey/authentication.mdx";
   slug: "guides/passkey/authentication";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"guides/Passkey/registration.md": {
-	id: "guides/Passkey/registration.md";
+} & { render(): Render[".mdx"] };
+"guides/Passkey/registration.mdx": {
+	id: "guides/Passkey/registration.mdx";
   slug: "guides/passkey/registration";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 "guides/Peer to Peer/answer.md": {
 	id: "guides/Peer to Peer/answer.md";
   slug: "guides/peer-to-peer/answer";
@@ -255,13 +255,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"guides/getting-started.md": {
-	id: "guides/getting-started.md";
+"guides/getting-started.mdx": {
+	id: "guides/getting-started.mdx";
   slug: "guides/getting-started";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 "guides/qr-code.md": {
 	id: "guides/qr-code.md";
   slug: "guides/qr-code";
