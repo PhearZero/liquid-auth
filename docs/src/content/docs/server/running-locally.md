@@ -1,7 +1,8 @@
 ---
-title: Running Locally
+title: 'Server: Running Locally'
 sidebar:
   order: 1
+  label: "Running Locally" 
 ---
 
 The Liquid Auth service is distributed as a Docker image. FIDO2 and WebRTC require a secure connection, we recommend [using ngrok](#ngrok) to create a secure tunnel to your local server.
@@ -28,6 +29,7 @@ docker run -d --env-file .env.docker -p 3000:3000 ghcr.io/algorandfoundation/liq
 > Example of using Docker Compose to run the Liquid Auth service.
 
 ```yaml
+#docker-compose.yml
 services:
   liquid-auth:
     image: ghcr.io/algorandfoundation/liquid-auth:develop

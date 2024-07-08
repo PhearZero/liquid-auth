@@ -1,10 +1,10 @@
 ---
-title: Authentication
+title: "Browser: Registration"
 sidebar:
-  order: 2
+  order: 1
 ---
 
-### Browser
+Register a passkey with the service and attest the knowledge of a KeyPair
 
 ```typescript
 // browser.client.ts

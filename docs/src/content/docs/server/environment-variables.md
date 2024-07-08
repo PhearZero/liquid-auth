@@ -1,7 +1,8 @@
 ---
-title: "Configuration"
+title: "Server: Configuration"
 sidebar:
-     order: 2
+  order: 2
+  label: 'Configuration'
 ---
 
 All configurations are set using environment variables.

@@ -1,7 +1,11 @@
 ---
-title: "Introduction"
+title: "Android: Introduction"
 sidebar:
   order: 0
+  label: "Introduction"
+  badge:
+      text: "WIP"
+      variant: caution
 prev: false
 ---
 

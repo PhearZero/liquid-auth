@@ -1,7 +1,11 @@
 ---
-title: Registration
+title: 'Android: Registration'
 sidebar:
   order: 1
+  label: 'Registration'
+  badge:
+      text: "WIP"
+      variant: caution
 ---
 
 ### Android

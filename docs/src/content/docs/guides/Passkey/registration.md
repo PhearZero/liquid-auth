@@ -1,10 +1,21 @@
 ---
-title: Registration
+title: Registration Guide
 sidebar:
-  order: 0
+  order: 11
+  badge:
+    text: "WIP"
+    variant: caution
+  label: Registration
+tags:
+  - Passkey
+  - Registration
+  - Wallet
+  - Android
+  - Browser
+  - Server
 ---
 
-The first step to registering a Passkey is fetching the `PublicKeyCredentialCreationOptions` from the [service](). 
+The first step to registering a Passkey is fetching the `PublicKeyCredentialCreationOptions` from the [service]().
 
 The standard URI for this request is `/attestation/request` using the `POST` method.
 

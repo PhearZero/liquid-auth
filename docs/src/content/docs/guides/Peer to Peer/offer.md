@@ -1,5 +1,9 @@
 ---
-title: "Offer Peer"
+title: "Offer Guide"
 sidebar:
-  order: 0
+  order: 20
+  label: "Offer"
+  badge:
+    text: "TODO"
+    variant: danger
 ---

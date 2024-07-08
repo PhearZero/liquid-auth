@@ -1,8 +1,12 @@
 ---
-title: 'Introduction'
+title: 'Server: Introduction'
 prev: false
 sidebar:
   order: 0
+  label: 'Introduction'
+  badge:
+    text: "WIP"
+    variant: caution
 ---
 
 Liquid Auth is a self-hosted authentication service that provides a simple way to associate Passkeys to KeyPair(s) commonly found in cryptocurrencies.

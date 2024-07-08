@@ -143,51 +143,79 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/Android/authentication.md": {
-	id: "clients/Android/authentication.md";
+"clients/android/answer.md": {
+	id: "clients/android/answer.md";
+  slug: "clients/android/answer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/authentication.md": {
+	id: "clients/android/authentication.md";
   slug: "clients/android/authentication";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/Android/introduction.md": {
-	id: "clients/Android/introduction.md";
+"clients/android/introduction.md": {
+	id: "clients/android/introduction.md";
   slug: "clients/android/introduction";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/Android/registration.md": {
-	id: "clients/Android/registration.md";
+"clients/android/offer.md": {
+	id: "clients/android/offer.md";
+  slug: "clients/android/offer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/registration.md": {
+	id: "clients/android/registration.md";
   slug: "clients/android/registration";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/Browser/authentication.md": {
-	id: "clients/Browser/authentication.md";
+"clients/browser/answer.md": {
+	id: "clients/browser/answer.md";
+  slug: "clients/browser/answer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/authentication.md": {
+	id: "clients/browser/authentication.md";
   slug: "clients/browser/authentication";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/Browser/introduction.md": {
-	id: "clients/Browser/introduction.md";
+"clients/browser/example.md": {
+	id: "clients/browser/example.md";
+  slug: "clients/browser/example";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/browser/introduction.md": {
+	id: "clients/browser/introduction.md";
   slug: "clients/browser/introduction";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/Browser/registration.md": {
-	id: "clients/Browser/registration.md";
-  slug: "clients/browser/registration";
+"clients/browser/offer.md": {
+	id: "clients/browser/offer.md";
+  slug: "clients/browser/offer";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/TODO.md": {
-	id: "clients/TODO.md";
-  slug: "clients/todo";
+"clients/browser/registration.md": {
+	id: "clients/browser/registration.md";
+  slug: "clients/browser/registration";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -220,6 +248,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"guides/concepts.md": {
+	id: "guides/concepts.md";
+  slug: "guides/concepts";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
 "guides/getting-started.md": {
 	id: "guides/getting-started.md";
   slug: "guides/getting-started";
@@ -227,23 +262,16 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"guides/qr-code.md": {
+	id: "guides/qr-code.md";
+  slug: "guides/qr-code";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
 "introduction.md": {
 	id: "introduction.md";
   slug: "introduction";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"reference/kotlin-api.md": {
-	id: "reference/kotlin-api.md";
-  slug: "reference/kotlin-api";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"reference/ts-api.md": {
-	id: "reference/ts-api.md";
-  slug: "reference/ts-api";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

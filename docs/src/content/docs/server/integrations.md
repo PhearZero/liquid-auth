@@ -1,7 +1,11 @@
 ---
-title: "Integrations"
+title: "Server: Integrations"
 sidebar:
-     order: 3
+  order: 3
+  label: 'Integrations'
+  badge:
+    text: "WIP"
+    variant: caution
 next: false
 ---
 

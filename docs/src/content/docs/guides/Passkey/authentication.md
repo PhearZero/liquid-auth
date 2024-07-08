@@ -1,12 +1,17 @@
 ---
-title: Authentication
+title: Authentication Guide
 sidebar:
-  order: 1
+  order: 10
+  label: Authentication
+  badge:
+    text: "WIP"
+    variant: caution
 tags:
-    - Authentication
-    - Passkey
-    - FIDO2
-    - WebAuthn
+  - Passkey
+  - Registration
+  - Android
+  - Browser
+  - Server
 ---
 
 The service has two endpoints for Passkey registration with the following schema from the [OpenApi documentation](/reference/api):
