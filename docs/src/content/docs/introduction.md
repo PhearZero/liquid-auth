@@ -1,6 +1,7 @@
 ---
 title: Introduction
 description: Welcome to the Liquid Auth documentation.
+pagefind: false
 ---
 
 Liquid Auth aims to give the user full control over their data and privacy.
