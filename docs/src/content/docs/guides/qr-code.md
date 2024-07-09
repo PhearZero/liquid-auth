@@ -5,5 +5,6 @@ sidebar:
   badge: 
     text: "TODO"
     variant: danger
+next: false
 ---
 
