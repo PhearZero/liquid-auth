@@ -1,0 +1,33 @@
+---
+title: "Offer Guide"
+sidebar:
+  order: 20
+  label: "Offer"
+  badge:
+    text: "WIP"
+    variant: caution
+---
+import {Aside} from '@astrojs/starlight/components';
+
+<Aside>The client must authenticate the request prior to sending the offer. See Linking for more information</Aside>
+
+An **Offer** is a type of session that is initiated by a client
+and is used to request an **Answer** from another client.
+```mermaid
+sequenceDiagram
+    participant A as Offer Client
+    participant B as Answer Client
+    A->>B: Offer
+    B->>A: Answer
+```
+
+## Peering
+
+TODO: add Tabs
+
+```typescript
+// Send the Offer and wait for the Answer
+client.peer(requestId, "answer").then((dc)=>{
+  // Handle the Data Channel
+})
+```

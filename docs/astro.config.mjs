@@ -10,14 +10,21 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   base: "/liquid-auth",
+  site: 'https://liquid-auth.io',
   markdown: {
     rehypePlugins: [rehypeMermaid]
   },
   integrations: [starlight({
-    title: "Liquid\nAuth",
+    title: "Liquid Auth",
     favicon: "./public/logo.svg",
+    customCss: [
+      './src/styles/mermaid.css',
+    ],
     logo: {
       src: "./public/logo.svg"
+    },
+    editLink: {
+      baseUrl: 'https://github.com/algorandfoundation/liquid-auth/edit/develop/docs/',
     },
     plugins: [
       // starlightTypeDoc({
