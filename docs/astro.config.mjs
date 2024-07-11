@@ -10,14 +10,21 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   base: "/liquid-auth",
+  site: 'https://liquid-auth.io',
   markdown: {
     rehypePlugins: [rehypeMermaid]
   },
   integrations: [starlight({
-    title: "Liquid\nAuth",
+    title: "Liquid Auth",
     favicon: "./public/logo.svg",
+    customCss: [
+      './src/styles/mermaid.css',
+    ],
     logo: {
       src: "./public/logo.svg"
+    },
+    editLink: {
+      baseUrl: 'https://github.com/algorandfoundation/liquid-auth/edit/develop/docs/',
     },
     plugins: [
       // starlightTypeDoc({
@@ -85,40 +92,58 @@ export default defineConfig({
           {
             label: "Introduction",
             link: "/clients/android/introduction",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            }
           },
           {
             label: "Registration",
             link: "/clients/android/registration",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            },
           },
           {
             label: "Authentication",
             link: "/clients/android/authentication",
-            badge: {
-              text: "TODO",
-              variant: "danger"
-            },
           },
           {
             label: "Peer Offer",
             link: "/clients/android/offer",
             badge: {
-              text: "TODO",
-              variant: "danger"
+              text: "WIP",
+              variant: "caution"
             },
           },
           {
             label: "Peer Answer",
             link: "/clients/android/answer",
             badge: {
-              text: "TODO",
+              text: "WIP",
+              variant: "caution"
+            },
+          },
+          {
+            label: "Provider Service",
+            collapsed: true,
+            items: [
+              {
+                label: "Introduction",
+                link: "/clients/android/provider-service/introduction",
+              },
+              {
+                label: "Create Passkey",
+                link: "/clients/android/provider-service/create-passkey",
+                badge: {
+                  text: "TODO",
+                  variant: "danger"
+                },
+              },
+              {
+                label: "Get Passkey",
+                link: "/clients/android/provider-service/get-passkey",
+                badge: {
+                  text: "TODO",
+                  variant: "danger"
+                },
+              }
+            ],
+              badge: {
+              text: "^14",
               variant: "danger"
             },
           },
@@ -139,42 +164,22 @@ export default defineConfig({
         items: [{
           label: "Introduction",
           link: "/clients/browser/introduction",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          }
         },
           {
           label: "Registration",
           link: "/clients/browser/registration",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
           label: "Authentication",
           link: "/clients/browser/authentication",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
           label: "Peer Offer",
           link: "/clients/browser/offer",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
           label: "Peer Answer",
           link: "/clients/browser/answer",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
             label: "Full Example",

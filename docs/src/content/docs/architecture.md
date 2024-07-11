@@ -10,15 +10,6 @@ This is a high level overview of the sequence of events that happens while using
 See the [Getting Started](./guides/getting-started) section for more detailed information on each step.
 Diagrams are generated using [Mermaid](https://mermaid-js.github.io/mermaid/#/).
 
-
-
-<style>
-    svg[aria-roledescription="sequence"] {
-        border-radius: 25px;
-        background-color: white;
-    }
-</style>
-
 ## Authentication
 
 A user can link their device to a website by scanning a QR code. 
@@ -28,9 +19,9 @@ The server will validate the FIDO2 credential and send a response to the wallet 
 
 ```mermaid
 sequenceDiagram
-    participant Website
+    participant Website as Answer Client
     participant Server
-    participant Wallet
+    participant Wallet as Offer Client
     Website->>Server: Subscribe to 'wss:link'
     Website-->>Website: Display QR Connect Request ID
     Wallet->>Website: Scan QR Code
@@ -49,9 +40,9 @@ The website and wallet can subscribe to an isolated WebSocket channel to broker 
 
 ```mermaid
 sequenceDiagram
-    participant Website
+    participant Website as Answer Client
     participant Server
-    participant Wallet
+    participant Wallet as Offer Client
     Website-->>Server: Subscribe to 'wss:offer-description'
     Website-->>Server: Subscribe to 'wss:offer-candidate'
     Wallet-->>Server: Subscribe to 'wss:answer-description'
@@ -67,9 +58,9 @@ Offer clients are responsible for creating the [Data Channel]().
 
 ```mermaid
 sequenceDiagram
-    participant Website
+    participant Website as Answer Client
     participant Server
-    participant Wallet
+    participant Wallet as Offer Client
     Wallet-->>Wallet: On answer-description, set Remote SDP
     Wallet-->>Wallet: On answer-candidate, add ICE Candidate
     Wallet-->>Wallet: Create Peer Offer & DataChannel
@@ -84,9 +75,9 @@ The answer description and candidates are emitted to the signaling service.
 
 ```mermaid
 sequenceDiagram
-    participant Website
+    participant Website as Answer Client
     participant Server
-    participant Wallet
+    participant Wallet as Offer Client
     Website-->>Website: On offer-description, set Remote SDP and create Answer
     Website-->>Website: On offer-candidate, add ICE Candidate
     Website-->>Server: Emit `wss:answer-description`
@@ -99,9 +90,9 @@ Once an Offer and Answer have been exchanged, a [Data Channel]() will be emitted
 This channel is used to send messages between the website and wallet in real-time over the established P2P connection.
 ```mermaid
 sequenceDiagram
-    participant Website
+    participant Website as Answer Client
     participant Server
-    participant Wallet
+    participant Wallet as Offer Client
     Wallet-->>Website: Emit DataChannel
     Wallet-->>Wallet: On Message, Handle Message
     Website-->>Website: On DataChannel, listen for Messages

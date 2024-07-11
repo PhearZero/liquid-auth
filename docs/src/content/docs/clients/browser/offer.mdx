@@ -1,0 +1,48 @@
+---
+title: 'Browser: Peer Offer'
+sidebar:
+    order: 3
+    label: 'Peer Offer'
+---
+import {Aside} from "@astrojs/starlight/components";
+
+<Aside type="caution">
+  Ensure both clients have a valid session before attempting to create peer connections.
+  See the [Authentication](/docs/clients/browser/authentication) and [Registration]() guides for more information.
+</Aside>
+
+[Peer-to-Peer]() connections can only be done using the `SignalClient`.
+Wallets are responsible for creating offers to connect.
+
+### Who is this for?
+
+- **Browser Wallets** that want to communicate with other clients
+
+## Signaling
+
+```typescript
+import { SignalClient } from "@algorandfoundation/liquid-client";
+const client = new SignalClient("<ORIGIN OF SERVICE>")
+
+// Receive the RequestID from the Peer willing to Answer this offer
+const requestId = 12345
+
+// Register or create a new credential,
+// ensure the requestId is included in the call
+// ...
+
+// Create the Peer Connection and await the remote client's answer
+client.peer(
+  // Request ID from the Peer,
+  // usually displayed as a Deep Link or QR Code
+  requestId,
+  // Type of remote client
+  'answer'
+).then((dataChannel: RTCDataChannel) => {
+  // Handle the data channel
+  dataChannel.onmessage = (event: MessageEvent) => {
+    console.log(event.data)
+  }
+  dataChannel.send('Hello world!')
+})
+```

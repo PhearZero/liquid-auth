@@ -1,0 +1,64 @@
+---
+title: "Browser: Registration"
+sidebar:
+  order: 1
+---
+
+Register a [Passkey](../../guides/concepts#passkeys) with the [Service](../../server/introduction) and attest the knowledge of a KeyPair.
+
+### Who is this for?
+
+- **Browser Wallets** that want to communicate with the service and other clients
+
+## Client
+
+Creating a passkey and registering it with the service using an instance of the `SignalClient`
+
+```typescript
+// browser.client.ts
+import * as nacl from 'tweetnacl'
+import {toBase64URL} from '@algorandfoundation/liquid-client/encoding'
+
+// Sign in to the service with a new credential and wallet
+await client.attestation(
+  // Callback when a challenge is received, return a signed challenge
+  async (challenge: Uint8Array) => ({
+    // The type of signature and public key
+    type: 'algorand',
+    // The address of the account
+    address: account.addr,
+    // The signature of the challenge, signed by the account
+    signature: toBase64URL(nacl.sign.detached(challenge, account.sk)),
+    // Optionally authenticate a remote peer
+    requestId: 12345,
+    // Optional device name
+    device: 'Demo Web Wallet'
+  })
+)
+
+```
+
+## Stateless
+
+Creating a passkey without using the `SignalClient`
+
+```typescript
+import {attestation} from '@algorandfoundation/liquid-client/attestation'
+import {toBase64URL} from '@algorandfoundation/liquid-client/encoding'
+await attestation(
+  "https://my-liquid-service.com",
+  // Callback when a challenge is received, return a signed challenge
+  async (challenge: Uint8Array) => ({
+    // The type of signature and public key
+    type: 'algorand',
+    // The address of the account
+    address: account.addr,
+    // The signature of the challenge, signed by the account
+    signature: toBase64URL(nacl.sign.detached(challenge, account.sk)),
+    // Optionally authenticate a remote peer
+    requestId: 12345,
+    // Optional device name
+    device: 'Demo Web Wallet'
+  })
+)
+```
