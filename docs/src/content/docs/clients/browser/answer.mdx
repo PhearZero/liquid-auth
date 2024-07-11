@@ -1,0 +1,38 @@
+---
+title: 'Browser: Peer Answer'
+---
+
+The answer client is used to respond to a remote client's offer.
+The remote client will have sent an offer to the answer client, which will then respond with an answer.
+
+### Who is this for?
+
+- **dApps** that want to leverage liquid-auth to connect to other clients
+- **Mobile Wallets** that want to tailor the onboarding and connect experience
+- **Browser Wallets** that want to communicate with other clients
+
+### Request ID
+
+Answer clients are responsible for creating the request id.
+Request IDs are given to the remote peer, usually as a deep-link encoded into a QR Code.
+This ID is used by the remote peer to authenticate the current client.
+
+```typescript
+import { SignalClient } from '@algorandfoundation/liquid-client';
+const requestId = SignalClient.generateRequestId();
+```
+
+## Signaling
+
+```typescript
+client
+    .peer(requestId, 'offer')
+    .then((dataChannel: RTCDataChannel)=>{
+        // Handle the data channel
+        dataChannel.onmessage = (event: MessageEvent) => {
+            console.log(event.data)
+        }
+    })
+const blob = await client.qrCode()
+// Display QR Code
+```

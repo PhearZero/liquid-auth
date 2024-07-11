@@ -146,42 +146,22 @@ export default defineConfig({
         items: [{
           label: "Introduction",
           link: "/clients/browser/introduction",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          }
         },
           {
           label: "Registration",
           link: "/clients/browser/registration",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
           label: "Authentication",
           link: "/clients/browser/authentication",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
           label: "Peer Offer",
           link: "/clients/browser/offer",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
           label: "Peer Answer",
           link: "/clients/browser/answer",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          },
         },
           {
             label: "Full Example",

@@ -6,7 +6,7 @@ You can check the example in the <a href="https://github.com/algorandfoundation/
 
 
 ## Answer Client
-
+A dApp that wants a remote wallet to log into the service and create a peer-to-peer connection.
 ```typescript
 import { SignalClient } from "@algorandfoundation/liquid-client";
 const client = new SignalClient(window.origin);
@@ -28,6 +28,8 @@ const qrData = await client.qrCode()
 ```
 
 ## Offer Client
+
+The remote browser-based wallet. This could be an extension or hybrid mobile application.
 
 ```typescript
 import * as nacl from 'tweetnacl'
