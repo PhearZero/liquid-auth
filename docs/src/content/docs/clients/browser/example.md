@@ -1,5 +1,6 @@
 ---
 title: 'Browser: Example'
+next: false
 ---
 
 You can check the example in the <a href="https://github.com/algorandfoundation/liquid-auth-js/tree/develop/example" target="blank">GitHub repository</a> for a working browser based application
