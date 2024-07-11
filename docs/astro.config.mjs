@@ -96,18 +96,10 @@ export default defineConfig({
           {
             label: "Registration",
             link: "/clients/android/registration",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            },
           },
           {
             label: "Authentication",
             link: "/clients/android/authentication",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            },
           },
           {
             label: "Peer Offer",

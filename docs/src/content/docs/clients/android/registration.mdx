@@ -15,15 +15,35 @@ val httpClient = OkHttpClient.Builder()
 val attestationApi = AttestationApi(httpClient)
 ```
 
+## User Agent
+
+The User-Agent string is used to authenticate the device.
+
+```kotlin
+// UA used to authenticate the device
+val userAgent = "${BuildConfig.APPLICATION_ID}/${BuildConfig.VERSION_NAME} " +
+"(Android ${Build.VERSION.RELEASE}; ${Build.MODEL}; ${Build.BRAND})"
+```
 
 ## Options
 
 Fetch attestation options from the service.
 ```kotlin
-val options = attestationApi.postAttestationOptions(
+// Create Options for FIDO2 Server
+val options = JSONObject()
+options.put("username", account.address.toString())
+options.put("displayName", "Liquid Auth User")
+options.put("authenticatorSelection", JSONObject().put("userVerification", "required"))
+
+// Enable Liquid Extension
+val extensions = JSONObject()
+extensions.put("liquid", true)
+options.put("extensions", extensions)
+
+val response = attestationApi.postAttestationOptions(
     origin, // Origin Server
-    "User-Agent-String", // Required for checking the authenticator fingerprint
-    JSONObject() // Additional Request Options
+    userAgent, // Required for checking the authenticator fingerprint
+    options // Additional Request Options
 )
 ```
 
@@ -39,11 +59,60 @@ using the [FIDO2ApiClient](https://developers.google.com/identity/fido/android/n
       FIDO2Client is deprecated which has been replaced by the CredentialManager.
       Not all features are available as of this writing in the CredentialManager.
     </Aside>
-    ```kotlin
-    // MainActivity.kt
-    import foundation.algorand.auth.fido2.*
+```kotlin
+// MainActivity.kt
 
-    ```
+val fido2Client = Fido2ApiClient(context)
+
+val origin = "https://my-liquid-service.com"
+
+// Fetch Attestation Options
+val response = attestationApi.postAttestationOptions(origin, userAgent, options).await()
+
+// Parse the response to PublicKeyCredentialCreationOptions
+val pubKeyCredentialCreationOptions = response.body!!.toPublicKeyCredentialCreationOptions()
+
+// Sign the challenge with the additional keypair you have custody of
+val signature = KeyPairs.rawSignBytes(
+    pubKeyCredentialCreationOptions.challenge,
+    keyPair.private
+)
+
+// Activity Result Handler
+fun handleAuthenticatorAttestationResult(activityResult: ActivityResult){
+    val bytes = activityResult.data?.getByteArrayExtra(Fido.FIDO2_KEY_CREDENTIAL_EXTRA)
+    when {
+        activityResult.resultCode != Activity.RESULT_OK ->
+            Log.d(TAG, "Not OK!")
+
+        bytes == null ->
+            Log.e(TAG, "Error!")
+
+        else -> {
+            /**
+             * Handle the PublicKeyCredential
+             *
+             * Now you can combine the PublicKeyCredential with the Liquid Extension JSON
+             * and submit it to the service for verification
+             */
+            val credential = PublicKeyCredential.deserializeFromBytes(bytes)
+        }
+    }
+}
+
+// Register/Attestation Intent Launcher
+val attestationIntentLauncher = registerForActivityResult(
+    ActivityResultContracts.StartIntentSenderForResult(),
+    ::handleAuthenticatorAttestationResult
+)
+
+// Launch the FIDO2 Intent
+val pendingIntent = fido2Client.getRegisterPendingIntent(pubKeyCredentialCreationOptions).await()
+attestationIntentLauncher.launch(
+    IntentSenderRequest.Builder(pendingIntent).build()
+)
+
+```
   </TabItem>
   <TabItem label="CredentialManager[WIP]">
     ```kotlin
@@ -58,9 +127,18 @@ using the [FIDO2ApiClient](https://developers.google.com/identity/fido/android/n
 ## Response
 
 ```kotlin
+// Create the Liquid Extension JSON
+val liquidExtJSON = JSONObject()
+liquidExtJSON.put("type", "algorand")
+liquidExtJSON.put("requestId", msg.requestId)
+liquidExtJSON.put("address", account.address.toString())
+liquidExtJSON.put("signature", Base64.encodeBase64URLSafeString(signature!!))
+liquidExtJSON.put("device", Build.MODEL)
+
 val response = attestationApi.postAttestationResponse(
     origin, // Origin Server
     "User-Agent-String", // Required for checking the authenticator fingerprint
-    credential // PublicKeyCredential
+    credential, // PublicKeyCredential
+    liquidExtJSON // Liquid Extension JSON
 )
 ```

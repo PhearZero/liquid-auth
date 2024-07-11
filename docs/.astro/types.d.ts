@@ -143,20 +143,20 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"clients/android/answer.md": {
-	id: "clients/android/answer.md";
+"clients/android/answer.mdx": {
+	id: "clients/android/answer.mdx";
   slug: "clients/android/answer";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"clients/android/authentication.md": {
-	id: "clients/android/authentication.md";
+} & { render(): Render[".mdx"] };
+"clients/android/authentication.mdx": {
+	id: "clients/android/authentication.mdx";
   slug: "clients/android/authentication";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 "clients/android/introduction.mdx": {
 	id: "clients/android/introduction.mdx";
   slug: "clients/android/introduction";
@@ -164,20 +164,20 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
-"clients/android/offer.md": {
-	id: "clients/android/offer.md";
+"clients/android/offer.mdx": {
+	id: "clients/android/offer.mdx";
   slug: "clients/android/offer";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"clients/android/registration.md": {
-	id: "clients/android/registration.md";
+} & { render(): Render[".mdx"] };
+"clients/android/registration.mdx": {
+	id: "clients/android/registration.mdx";
   slug: "clients/android/registration";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 "clients/browser/answer.mdx": {
 	id: "clients/browser/answer.mdx";
   slug: "clients/browser/answer";

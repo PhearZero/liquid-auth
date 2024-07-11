@@ -14,21 +14,30 @@ val httpClient = OkHttpClient.Builder()
 val assertionApi = AssertionApi(httpClient)
 ```
 
+## User Agent
+
+The User-Agent string is used to authenticate the device.
+
+```kotlin
+// UA used to authenticate the device
+val userAgent = "${BuildConfig.APPLICATION_ID}/${BuildConfig.VERSION_NAME} " +
+"(Android ${Build.VERSION.RELEASE}; ${Build.MODEL}; ${Build.BRAND})"
+```
 
 ## Options
 
-Fetch attestation options from the service.
+Fetch assertion options from the service.
 ```kotlin
-val options = assertionApi.postAssertionOptions(
+val response = assertionApi.postAssertionOptions(
     origin, // Origin Server
-    "User-Agent-String", // Required for checking the authenticator fingerprint
-    JSONObject() // Additional Request Options
-)
+    userAgent, // Required for checking the authenticator fingerprint
+    credentialId // Base64URL Encoded Credential ID
+).await()
 ```
 
-## Creating
+## Retrieving
 
-There are several ways to handle the creation of a new Passkey.
+There are several ways to handle the retrieval of an existing Passkey.
 We recommend
 using the [FIDO2ApiClient](https://developers.google.com/identity/fido/android/native-apps) or [CredentialManager](https://developer.android.com/identity/sign-in/credential-manager)
 
@@ -40,8 +49,50 @@ using the [FIDO2ApiClient](https://developers.google.com/identity/fido/android/n
     </Aside>
     ```kotlin
     // MainActivity.kt
-    import foundation.algorand.auth.fido2.*
+    val fido2Client = Fido2ApiClient(context)
 
+    val origin = "https://my-liquid-service.com"
+    val credentialId = "Base64URL Encoded Credential ID"
+
+    // Fetch Attestation Options
+    val response = attestationApi.postAssertionOptions(origin, userAgent, credentialId).await()
+
+    // Parse the response to PublicKeyCredentialRequestOptions
+    val publicKeyCredentialRequestOptions = response.body.toPublicKeyCredentialRequestOptions()
+
+    // Activity Result Handler
+    fun handleAuthenticatorAssertionResult(activityResult: ActivityResult){
+        val bytes = activityResult.data?.getByteArrayExtra(Fido.FIDO2_KEY_CREDENTIAL_EXTRA)
+        when {
+            activityResult.resultCode != Activity.RESULT_OK ->
+                Log.d(TAG, "Not OK!")
+
+            bytes == null ->
+                Log.e(TAG, "Error!")
+
+            else -> {
+                /**
+                 * Handle the PublicKeyCredential
+                 *
+                 * Now you can combine the PublicKeyCredential with the Liquid Extension JSON
+                 * and submit it to the service for verification
+                 */
+                val credential = PublicKeyCredential.deserializeFromBytes(bytes)
+            }
+        }
+    }
+
+    // Register/Attestation Intent Launcher
+    val assertionIntentLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult(),
+        ::handleAuthenticatorAssertionResult
+    )
+
+    // Launch the FIDO2 Intent
+    val pendingIntent = fido2Client.getRegisterPendingIntent(publicKeyCredentialRequestOptions).await()
+    assertionIntentLauncher.launch(
+        IntentSenderRequest.Builder(pendingIntent).build()
+    )
     ```
   </TabItem>
   <TabItem label="CredentialManager[WIP]">
@@ -57,9 +108,15 @@ using the [FIDO2ApiClient](https://developers.google.com/identity/fido/android/n
 ## Response
 
 ```kotlin
+// MainActivity.kt
+
+val liquidExtJSON = JSONObject()
+liquidExtJSON.put("requestId", requestId)
+
 val response = assertionApi.postAssertionResponse(
     origin, // Origin Server
-    "User-Agent-String", // Required for checking the authenticator fingerprint
-    credential // PublicKeyCredential
+    userAgent, // Required for checking the authenticator fingerprint
+    credential, // PublicKeyCredential
+    liquidExtJSON // Liquid Extension JSON
 )
 ```
