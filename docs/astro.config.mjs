@@ -105,24 +105,24 @@ export default defineConfig({
             label: "Authentication",
             link: "/clients/android/authentication",
             badge: {
-              text: "TODO",
-              variant: "danger"
+              text: "WIP",
+              variant: "caution"
             },
           },
           {
             label: "Peer Offer",
             link: "/clients/android/offer",
             badge: {
-              text: "TODO",
-              variant: "danger"
+              text: "WIP",
+              variant: "caution"
             },
           },
           {
             label: "Peer Answer",
             link: "/clients/android/answer",
             badge: {
-              text: "TODO",
-              variant: "danger"
+              text: "WIP",
+              variant: "caution"
             },
           },
           {

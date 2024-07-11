@@ -26,6 +26,11 @@ You can use the following command to get the SHA256 fingerprint of your applicat
 keytool -list -v -keystore <path> -alias <alias> -storepass <store_password> -keypass <key password>
 ```
 
+<Aside>
+  For production, this fingerprint should be shared on any services that will be verifying the credential.
+</Aside>
+
+
 ## Getting Started
 
 Run a local instance
