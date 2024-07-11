@@ -92,10 +92,6 @@ export default defineConfig({
           {
             label: "Introduction",
             link: "/clients/android/introduction",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            }
           },
           {
             label: "Registration",

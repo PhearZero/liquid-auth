@@ -1,0 +1,84 @@
+---
+title: "Android: Introduction"
+prev: false
+---
+import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Aside type="caution">
+  Handling [Passkeys](../../guides/concepts#passkeys) in Android can be non-trivial and requires careful planning when integrating
+</Aside>
+
+The Android Client is a library that allows you to interact with the Liquid Auth Service and provides
+utilities to integrate with the native platform.
+
+### Pre-requisites
+
+Install [Android Studio](https://developer.android.com/studio) and create or open an application.
+
+
+### Fingerprint
+
+Get the SHA256 fingerprint of your application.
+The Server uses the fingerprint to attest the credential.
+You can use the following command to get the SHA256 fingerprint of your application.
+
+```bash
+keytool -list -v -keystore <path> -alias <alias> -storepass <store_password> -keypass <key password>
+```
+
+## Getting Started
+
+Run a local instance
+or deploy the [Liquid Auth Service](../../../server/running-locally)
+using the SHA256 fingerprint and application name in the [environment configuration](../../server/environment-variables)
+
+### Install
+
+Add jitpack as a repository
+<Tabs>
+  <TabItem label="settings.gradle.kts">
+    ```kotlin
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+          google()
+          mavenCentral()
+          maven {
+            setUrl("https://jitpack.io")
+          }
+        }
+    }
+    ```
+  </TabItem>
+  <TabItem label="settings.gradle">
+    ```groovy
+    dependencyResolutionManagement {
+      repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+      repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+Install the package
+
+<Tabs>
+  <TabItem label="build.gradle.kts">
+    ```kotlin
+    dependencies {
+      implementation("com.github.algorandfoundation:liquid-auth-android:v1.0.0-canary.3")
+    }
+    ```
+  </TabItem>
+  <TabItem label="build.gradle">
+    ```groovy
+    dependencies {
+      implementation 'com.github.algorandfoundation:liquid-auth-android:v1.0.0-canary.3'
+    }
+    ```
+  </TabItem>
+</Tabs>
