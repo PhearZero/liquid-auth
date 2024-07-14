@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { useSignalClient } from '@/hooks/useSignalClient.ts';
 import { SignalClient } from '@algorandfoundation/liquid-client';
+
 const style = {
   position: 'absolute' as const,
   top: '50%',
@@ -39,7 +40,7 @@ export function ConnectModal({
 }) {
   const { client, loading, dataChannel } = useSignalClient();
   const navigate = useNavigate();
-  const [requestId] = useState(SignalClient.generateRequestId());
+  const [requestId] = useState<string>(SignalClient.generateRequestId());
 
   const [open, setOpen] = React.useState(false);
   const [barcode, setBarcode] = React.useState('/qr-loading.png');

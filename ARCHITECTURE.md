@@ -21,14 +21,14 @@ interface LiquidClientAttestationExtensionResults {
     type: string; // Currently only "algorand" supported
     address: string; // Wallet Address
     signature: string; // Base64URL Encoded Signature
-    requestId?: any // Optional Request ID , authenticate a remote user simaltaneously
+    requestId?: string // Optional Request ID , authenticate a remote user simaltaneously
     device?: string // Optional Device Name
   }
 }
 // Authenticator Get Response
 interface LiquidClientAssertionExtensionResults {
   liquid: {
-    requestId?: any; // Optional Request ID
+    requestId?: string; // Optional Request ID
   }
 }
 
@@ -112,7 +112,7 @@ This will associate the credential with the wallet address and the credential ca
   "clientExtensionResults": {
     "liquid": {
       "type": "algorand",
-      "requestId": 0.6050027432326752,
+      "requestId": "019097ff-bb8c-7c42-9700-f11b9446fad7",
       "address": "2SPDE6XLJNXFTOO7OIGNRNKSEDOHJWVD3HBSEAPHONZQ4IQEYOGYTP6LXA",
       "signature": "QY31mdH8AwpJ9p4pCXBO2iA5WdU-BjG52xEtJNuSJNHJIaJ10uzqk3FdR0fvYVfb_rzXTuWn4k1PFFeg-vpEDw",
       "device": "Pixel 8 Pro"
@@ -176,7 +176,7 @@ Optionally add a `requestId` to also authenticate a remote session
   "rawId": "AYMPi2Rbhcnu2gSHOO1TNvzDJ38iU00rrlCqyH874XCIEoIotRc7eVRFpx0TvsQurg7BAnXy5KnWdKC8LeWs0k0",
   "clientExtensionResults": {
     "liquid": {
-      "requestId": 0.4352672418598509
+      "requestId": "019097ff-bb8d-75d8-b950-33de977c2d3f"
     }
   },
   "response": {

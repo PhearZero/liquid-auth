@@ -93,10 +93,10 @@ export class SignalsGateway
    */
   @SubscribeMessage('link')
   async link(
-    @MessageBody() body: { requestId: string | number },
+    @MessageBody() body: { requestId: string },
     @ConnectedSocket() client: Socket,
   ): Promise<
-    Observable<{ data: { requestId: string | number; wallet: string } }>
+    Observable<{ data: { requestId: string; wallet: string } }>
   > {
     const request = client.request as Record<string, any>;
     this.logger.debug(
