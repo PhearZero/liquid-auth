@@ -1,0 +1,30 @@
+---
+title: "Answer Guide"
+sidebar:
+    order: 21
+    label: "Answer"
+    badge:
+        text: "WIP"
+        variant: caution
+---
+
+An **Answer** is a type of session that is initiated by a client
+and is used to respond to an **Offer** from another client.
+```mermaid
+sequenceDiagram
+    participant A as Answer Client
+    participant B as Offer Client
+    B->>A: Offer
+    A->>B: Answer
+```
+
+## Peering
+
+TODO: add Tabs
+
+```typescript
+// Wait for the Offer and send the Answer
+client.peer(requestId, "offer").then((dc)=>{
+  // Handle the Data Channel
+})
+```

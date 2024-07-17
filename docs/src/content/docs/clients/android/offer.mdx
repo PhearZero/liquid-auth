@@ -1,0 +1,21 @@
+---
+title: 'Android: Peer Offer'
+---
+import {Aside} from "@astrojs/starlight/components";
+
+<Aside type="caution">
+  Ensure both clients have a valid session before attempting to create peer connections.
+  See the [Authentication](./authentication) and [Registration](./registration) guides for more information.
+</Aside>
+
+[Peer-to-Peer]() connections can only be done using the `SignalClient`.
+Wallets are responsible for creating offers to connect.
+
+## Signaling
+
+```kotlin
+val requestID = 12345 // Scanned from a QR Code or Deep Link
+val origin = "https://my-liquid-service.com" // Origin of the service
+val client = SignalClient(origin, context, httpClient)
+val dc = signalClient?.peer(requestId, "answer" )
+```
