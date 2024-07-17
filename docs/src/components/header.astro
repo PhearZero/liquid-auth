@@ -1,6 +1,7 @@
 ---
 const name = 'Liquid Auth';
-const base = import.meta.env.BASE_URL
+const baseURL = import.meta.env.BASE_URL;
+const base = baseURL === '/' ? '.' : baseURL;
 const logo = `${base}/logo.svg`;
 
 const links = [
