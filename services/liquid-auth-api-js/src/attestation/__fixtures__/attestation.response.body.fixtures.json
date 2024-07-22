@@ -6,7 +6,7 @@
     "clientExtensionResults": {
       "liquid": {
         "type": "algorand",
-        "requestId": 0.6050027432326752,
+        "requestId": "019097ff-bb8c-7514-a0c6-5209d2405a4a",
         "address": "2SPDE6XLJNXFTOO7OIGNRNKSEDOHJWVD3HBSEAPHONZQ4IQEYOGYTP6LXA",
         "signature": "QY31mdH8AwpJ9p4pCXBO2iA5WdU-BjG52xEtJNuSJNHJIaJ10uzqk3FdR0fvYVfb_rzXTuWn4k1PFFeg-vpEDw",
         "device": "Pixel 8 Pro"
@@ -25,7 +25,7 @@
     "clientExtensionResults": {
       "liquid": {
         "type": "algorand",
-        "requestId": 0.1824949283001871,
+        "requestId": "019097ff-bb8c-7bf7-ac3e-a85e1d40062f",
         "address": "KH4XYQ4ZYKARWZAYVIVAY6WPWXNU3FWU2QC6HF2666KKM6CH4APTUIOQHU",
         "signature": "f0KUNI-Q5H54aSurcxCYwhCuQP8UtuHn2Ne5RhxeXfribsH1plCgbNVI4gwn183WxW8aSA-2JhxqLSe2J7ApCA",
         "device": "Pixel 8 Pro"
@@ -44,7 +44,7 @@
     "clientExtensionResults": {
       "liquid": {
         "type": "algorand",
-        "requestId": 0.1294004256903012,
+        "requestId": "019097ff-bb8c-7176-a12d-0ca31e3b5cf5",
         "address": "6P3TIK6KEPUNVHM77UXVG7ZIZRCCJX6IKZ5FA3WMXKRBHIXW4SAQ3OSEY4",
         "signature": "t6LqTuixeQ7WG1M-XxhSJvKBydY5YBEXCZi2BU_W9zJf2qWBGIbVlnMSfQnfc0ApYjsOO-bKnnoJtJdbh0lACQ",
         "device": "Pixel 8 Pro"
@@ -63,7 +63,7 @@
     "clientExtensionResults": {
       "liquid": {
         "type": "algorand",
-        "requestId": 0.5687522830110388,
+        "requestId": "019097ff-bb8c-7ec0-8912-fe9dfcf346b4",
         "address": "2W5VGV43VOKJTVFZXCEZ6L647XCQEXCDNZGDVFROWAR4FZJJCOWHVXLFOE",
         "signature": "QL0e1z24j1K5ZErHtwhpJPBBb7z-tdSb8IOuAuGVzL8KvxMQdAQihWM3-us-Vl3DkQD1GuXMlwB8BpZijvLyDw",
         "device": "Pixel 8 Pro"
@@ -82,7 +82,7 @@
     "clientExtensionResults": {
       "liquid": {
         "type": "algorand",
-        "requestId": 0.7699192258303749,
+        "requestId": "019097ff-bb8c-793f-a8b1-23ae835eb9fa",
         "address": "L72CSGO2C7K6QJZHVC2AYCLZ5GY3IMN7GJVKVNXU5WDDKLENPKSBZ7GE7U",
         "signature": "RX-r27Alz0i4IF9wRaEy2kp6na29mTTOYSYzHwBWfwv5wNHkPwvIT2spDFdsvaxlt_M16OKo0PVqOUOAuhhGAQ",
         "device": "Pixel 8 Pro"
@@ -101,7 +101,7 @@
     "clientExtensionResults": {
       "liquid": {
         "type": "algorand",
-        "requestId": 0.07304218671956053,
+        "requestId": "019097ff-bb8c-77fc-8ff2-eca0584cf04f",
         "address": "OXOACNIWZ7VDJXJXJHQ53BMNFQTSPPW524RU5JVAFLHSSGGQZCTII65ZII",
         "signature": "Fy7gb4f5PSrLOPRRFtQwB-f6kDuapV_T_MDtDY6TwT2ha9D1Km01KBmdFCgHN5VF9G__ae4bTRzC2VtOx37YAQ",
         "device": "Pixel 8 Pro"
