@@ -171,6 +171,27 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"clients/android/provider-service/create-passkey.md": {
+	id: "clients/android/provider-service/create-passkey.md";
+  slug: "clients/android/provider-service/create-passkey";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/provider-service/get-passkey.md": {
+	id: "clients/android/provider-service/get-passkey.md";
+  slug: "clients/android/provider-service/get-passkey";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"clients/android/provider-service/introduction.mdx": {
+	id: "clients/android/provider-service/introduction.mdx";
+  slug: "clients/android/provider-service/introduction";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "clients/android/registration.mdx": {
 	id: "clients/android/registration.mdx";
   slug: "clients/android/registration";

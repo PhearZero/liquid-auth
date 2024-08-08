@@ -58,11 +58,7 @@ export default defineConfig({
       collapsed: true,
       items: [{
         label: "Introduction",
-        link: "/server/introduction",
-        badge: {
-          text: "WIP",
-          variant: "caution"
-        }
+        link: "/server/introduction"
       },
         {
         label: "Running locally",
@@ -75,10 +71,6 @@ export default defineConfig({
         {
         label: "Integrations",
         link: "/server/integrations",
-          badge: {
-            text: "WIP",
-            variant: "caution"
-          }
       },
         ...openAPISidebarGroups,
       ]
