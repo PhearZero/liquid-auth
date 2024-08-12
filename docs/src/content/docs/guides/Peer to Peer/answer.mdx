@@ -3,28 +3,31 @@ title: "Answer Guide"
 sidebar:
     order: 21
     label: "Answer"
-    badge:
-        text: "WIP"
-        variant: caution
 ---
+
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 An **Answer** is a type of session that is initiated by a client
 and is used to respond to an **Offer** from another client.
-```mermaid
-sequenceDiagram
-    participant A as Answer Client
-    participant B as Offer Client
-    B->>A: Offer
-    A->>B: Answer
-```
 
-## Peering
+This is usually a dApp that wants to peer with a wallet client with an Offer.
+The Answer client is responsible for presenting the QRCode to the Offer client.
 
-TODO: add Tabs
+<LinkCard
+  href="/guides/Peer%20to%20Peer/exchange"
+  title="Exchange Sessions"
+  description="A detailed guide on how Offer and Answer clients exchange messages."
+/>
 
-```typescript
-// Wait for the Offer and send the Answer
-client.peer(requestId, "offer").then((dc)=>{
-  // Handle the Data Channel
-})
-```
+<CardGrid>
+  <LinkCard
+    href="/clients/browser/answer"
+    title="Browser: Peer Answer"
+    description="A detailed guide on using the Answer client in the browser."
+  />
+  <LinkCard
+    href="/clients/android/answer"
+    title="Android: Peer Answer"
+    description="A detailed guide on using the Answer client in Android."
+  />
+</CardGrid>

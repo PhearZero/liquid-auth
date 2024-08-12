@@ -262,6 +262,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"guides/Peer to Peer/exchange.mdx": {
+	id: "guides/Peer to Peer/exchange.mdx";
+  slug: "guides/peer-to-peer/exchange";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "guides/Peer to Peer/offer.mdx": {
 	id: "guides/Peer to Peer/offer.mdx";
   slug: "guides/peer-to-peer/offer";
@@ -328,6 +335,20 @@ declare module 'astro:content' {
 "server/running-locally.md": {
 	id: "server/running-locally.md";
   slug: "server/running-locally";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"server/tmp.md": {
+	id: "server/tmp.md";
+  slug: "server/tmp";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"server/tmp2.md": {
+	id: "server/tmp2.md";
+  slug: "server/tmp2";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

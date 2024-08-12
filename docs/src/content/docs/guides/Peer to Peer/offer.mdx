@@ -3,31 +3,30 @@ title: "Offer Guide"
 sidebar:
   order: 20
   label: "Offer"
-  badge:
-    text: "WIP"
-    variant: caution
 ---
-import {Aside} from '@astrojs/starlight/components';
+import {Aside, CardGrid, LinkCard} from '@astrojs/starlight/components';
 
-<Aside>The client must authenticate the request prior to sending the offer. See Linking for more information</Aside>
+<Aside>The client must authenticate the request prior to sending the offer. See [Authentication](/guides/passkey/authentication/) for more information</Aside>
 
 An **Offer** is a type of session that is initiated by a client
-and is used to request an **Answer** from another client.
-```mermaid
-sequenceDiagram
-    participant A as Offer Client
-    participant B as Answer Client
-    A->>B: Offer
-    B->>A: Answer
-```
+and is used to create a P2P connection with an **Answer** client.
 
-## Peering
+This is usually a wallet that wants to peer with a dApp client that can produce an Answer.
 
-TODO: add Tabs
-
-```typescript
-// Send the Offer and wait for the Answer
-client.peer(requestId, "answer").then((dc)=>{
-  // Handle the Data Channel
-})
-```
+<LinkCard
+  href="/guides/Peer%20to%20Peer/exchange"
+  title="Exchange Sessions"
+  description="A detailed guide on how Offer and Answer clients exchange messages."
+/>
+<CardGrid>
+  <LinkCard
+    href="/clients/browser/offer"
+    title="Browser: Peer Offer"
+    description="A detailed guide on using the Offer client in the browser."
+  />
+  <LinkCard
+    href="/clients/android/offer"
+    title="Android: Peer Offer"
+    description="A detailed guide on using the Offer client in Android."
+  />
+</CardGrid>
