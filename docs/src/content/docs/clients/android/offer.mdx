@@ -8,14 +8,35 @@ import {Aside} from "@astrojs/starlight/components";
   See the [Authentication](./authentication) and [Registration](./registration) guides for more information.
 </Aside>
 
-[Peer-to-Peer]() connections can only be done using the `SignalClient`.
+[Peer-to-Peer](/guides/concepts/#peer-to-peer) connections can only be done using the `SignalClient`.
 Wallets are responsible for creating offers to connect.
+
+### Who is this for?
+
+- **Android Wallets** that want to communicate with other clients
 
 ## Signaling
 
 ```kotlin
-val requestID = 12345 // Scanned from a QR Code or Deep Link
-val origin = "https://my-liquid-service.com" // Origin of the service
+// Example.kt
+import foundation.algorand.auth.connect.SignalClient
+
+val requestID = "UUID-STRING-FROM-QR-CODE" // Scanned from a QR Code or Deep Link
+val origin = "https://<ORIGIN-OF-SERVICE-FROM-QR-CODE>" // Origin of the service
 val client = SignalClient(origin, context, httpClient)
-val dc = signalClient?.peer(requestId, "answer" )
+val dc = client.peer(requestId, "answer" )
+```
+
+## Data Channel[WIP]
+
+We are working on a more robust way to handle data channel messages. For now, you can use the following:
+
+```kotlin
+// Example.kt
+
+client.handleDataChannel(dc, {
+    Log.d(TAG, "onMessage($it)")
+}, {
+    Log.d(TAG, "onStateChange($it)")
+})
 ```

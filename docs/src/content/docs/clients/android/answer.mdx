@@ -17,18 +17,28 @@ val origin = "https://my-liquid-service.com" // Specify the origin of the servic
 val client = SignalClient(origin, context, httpClient) // Create the Client
 
 // Display the QR Code
-val qrCode = signalClient.qrCode(requestId, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
+val qrCode = client.qrCode(requestId, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
 
 // Wait for peer to scan the QR Code
-val dc = signalClient.peer(requestId, "offer" )
+val dc = client.peer(requestId, "offer" )
 
-// Handle the data channel messages and state changes
-signalClient.handleDataChannel(dc!!, {
+```
+
+## Data Channel[WIP]
+
+We are working on a more robust way to handle data channel messages. For now, you can use the following:
+
+```kotlin
+// Example.kt
+
+// Handle Peer Messages
+client.handleDataChannel(dc, {
     Log.d(TAG, "onMessage($it)")
-},{
+}, {
     Log.d(TAG, "onStateChange($it)")
 })
 
+
 // Send Message to Peer
-signalClient.peerClient.send("Hello World!")
+client.send("Hello World!")
 ```

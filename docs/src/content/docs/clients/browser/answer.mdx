@@ -25,14 +25,26 @@ const requestId = SignalClient.generateRequestId();
 ## Signaling
 
 ```typescript
+// Wait for a remote offer for the current request id
 client
     .peer(requestId, 'offer')
-    .then((dataChannel: RTCDataChannel)=>{
-        // Handle the data channel
-        dataChannel.onmessage = (event: MessageEvent) => {
-            console.log(event.data)
-        }
-    })
-const blob = await client.qrCode()
+    .then(handleDataChannel)
+
 // Display QR Code
+const blob = await client.qrCode()
 ```
+
+## Data Channel[WIP]
+
+We are working on a more robust way to handle data channel messages. For now, you can use the following:
+
+```typescript
+
+function handleDataChannel(dc: RTCDataChannel){
+  dc.onmessage = (event: MessageEvent) => {
+      console.log(event.data)
+    }
+  dc.send('Hello world!')
+}
+```
+
