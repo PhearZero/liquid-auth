@@ -95,18 +95,10 @@ export default defineConfig({
           {
             label: "Peer Offer",
             link: "/clients/android/offer",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            },
           },
           {
             label: "Peer Answer",
             link: "/clients/android/answer",
-            badge: {
-              text: "WIP",
-              variant: "caution"
-            },
           },
           {
             label: "Provider Service",

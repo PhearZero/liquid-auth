@@ -262,6 +262,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"guides/Peer to Peer/exchange.mdx": {
+	id: "guides/Peer to Peer/exchange.mdx";
+  slug: "guides/peer-to-peer/exchange";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "guides/Peer to Peer/offer.mdx": {
 	id: "guides/Peer to Peer/offer.mdx";
   slug: "guides/peer-to-peer/offer";

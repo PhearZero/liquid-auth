@@ -11,7 +11,7 @@ import {Aside} from "@astrojs/starlight/components";
   See the [Authentication](/docs/clients/browser/authentication) and [Registration]() guides for more information.
 </Aside>
 
-[Peer-to-Peer]() connections can only be done using the `SignalClient`.
+[Peer-to-Peer](/guides/concepts/#peer-to-peer) connections can only be done using the `SignalClient`.
 Wallets are responsible for creating offers to connect.
 
 ### Who is this for?
@@ -22,27 +22,32 @@ Wallets are responsible for creating offers to connect.
 
 ```typescript
 import { SignalClient } from "@algorandfoundation/liquid-client";
-const client = new SignalClient("<ORIGIN OF SERVICE>")
+const client = new SignalClient("<ORIGIN-FROM-QR-CODE>")
 
 // Receive the RequestID from the Peer willing to Answer this offer
-const requestId = 12345
+const requestId = "<UUID-FROM-QR-CODE>"
 
 // Register or create a new credential,
 // ensure the requestId is included in the call
 // ...
 
 // Create the Peer Connection and await the remote client's answer
-client.peer(
+const dc = await client.peer(
   // Request ID from the Peer,
   // usually displayed as a Deep Link or QR Code
   requestId,
   // Type of remote client
   'answer'
-).then((dataChannel: RTCDataChannel) => {
-  // Handle the data channel
-  dataChannel.onmessage = (event: MessageEvent) => {
+)
+```
+
+## Data Channel[WIP]
+
+We are working on a more robust way to handle data channel messages. For now, you can use the following:
+
+```typescript
+dc.onmessage = (event: MessageEvent) => {
     console.log(event.data)
   }
-  dataChannel.send('Hello world!')
-})
+dc.send('Hello world!')
 ```

@@ -1,0 +1,25 @@
+---
+title: "Exchange Sessions"
+sidebar:
+  order: 22
+label: "Exchange"
+---
+
+Both clients listen for each other's **Offer** and **Answer** messages at the relay service.
+Once the QR code is scanned, the **Offer** client proves it's identity then sends an **Offer** message to the **Answer** client.
+The **Answer** client then sends an **Answer** message to the **Offer** client,
+and the two clients can communicate over the P2P connection.
+
+```mermaid
+sequenceDiagram
+    participant A as Answer Client
+    participant C as Liquid Service
+    participant B as Offer Client
+    A->>A: Present QR Code
+    B->>A: Scan QR Code
+    A-->>B: Receive Origin and RequestId
+    B->>C: Offer to Origin
+    C->>A: Offer to Client
+    A->>C: Answer to Origin
+    C->>B: Answer to Client
+```
