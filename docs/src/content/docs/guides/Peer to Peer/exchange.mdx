@@ -1,14 +1,16 @@
 ---
-title: "Exchange Sessions"
+title: "Peer: Exchange Guide"
 sidebar:
   order: 22
-label: "Exchange"
+  label: "Exchange"
+next: false
 ---
 
 Both clients listen for each other's **Offer** and **Answer** messages at the relay service.
-Once the QR code is scanned, the **Offer** client proves it's identity then sends an **Offer** message to the **Answer** client.
-The **Answer** client then sends an **Answer** message to the **Offer** client,
-and the two clients can communicate over the P2P connection.
+Once the [Deep Link](/guides/linking/#deep-link) is received,
+the **Offer** client proves its identity using the [Liquid Extension](/guides/passkey/extension)
+then sends an **Offer** message to the **Answer** client.
+The **Answer** client then sends an **Answer** message to the **Offer** client.
 
 ```mermaid
 sequenceDiagram
@@ -18,8 +20,51 @@ sequenceDiagram
     A->>A: Present QR Code
     B->>A: Scan QR Code
     A-->>B: Receive Origin and RequestId
-    B->>C: Offer to Origin
-    C->>A: Offer to Client
-    A->>C: Answer to Origin
-    C->>B: Answer to Client
+    B->>C: Authenticate/Register
+    C->>C: Validate Signatures
+    C->>C: Join Clients to Room
+    C-->>B: Ok Response
+    B->>C: Emit Offer to Origin
+    C-->>A: Emit Offer to Client
+    A->>C: Emit Answer to Origin
+    C-->>B: Emit Answer to Client
+```
+
+## ICE Candidates
+
+The clients exchange ICE candidates to establish a connection.
+The ICE candidates are used to determine the best path for the data to travel between the clients.
+The clients exchange ICE candidates over the signaling server via WebSockets.
+
+```mermaid
+sequenceDiagram
+    participant A as Answer Client
+    participant C as Liquid Service
+    participant B as Offer Client
+    A->>A: Gather ICE Candidates
+    A->>C: Send ICE Candidates
+    C->>B: Send ICE Candidates
+    B->>B: Gather ICE Candidates
+    B->>C: Send ICE Candidates
+    C->>A: Send ICE Candidates
+```
+
+### Candidate Discovery
+
+STUN and TURN servers are used as a fallback when a local connection cannot be established on the LAN.
+The STUN server is used to discover the client's public IP address,
+while the TURN server is used to relay data if a direct connection to public IP cannot be established.
+
+The following diagram shows the exchange of STUN/TURN candidates with a client.
+
+```mermaid
+sequenceDiagram
+    participant A as Peer A
+    participant B as STUN Service
+    participant C as TURN Service
+    A->>A: Get Local Candidates
+    A->>B: Get STUN Candidates
+    B-->>A: Send STUN Candidates
+    A->>C: Get TURN Relay Candidates
+    C-->>A: Send TURN Relay Candidates
 ```

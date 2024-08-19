@@ -1,5 +1,5 @@
 ---
-title: "Android: Create Service Passkey"
+title: "Android 14: Register"
 ---
 
 
@@ -13,6 +13,6 @@ if (request != null) {
         finish()
     }
 } else {
-    binding.getPasskeyMessage.text = resources.getString(R.string.get_passkey_error)
+    val text = resources.getString(R.string.get_passkey_error)
 }
 ```

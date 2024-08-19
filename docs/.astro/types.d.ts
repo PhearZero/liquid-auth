@@ -141,217 +141,224 @@ declare module 'astro:content' {
   slug: "architecture";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "clients/android/answer.mdx": {
 	id: "clients/android/answer.mdx";
   slug: "clients/android/answer";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/android/authentication.mdx": {
 	id: "clients/android/authentication.mdx";
   slug: "clients/android/authentication";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/android/introduction.mdx": {
 	id: "clients/android/introduction.mdx";
   slug: "clients/android/introduction";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/android/offer.mdx": {
 	id: "clients/android/offer.mdx";
   slug: "clients/android/offer";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
-"clients/android/provider-service/create-passkey.md": {
-	id: "clients/android/provider-service/create-passkey.md";
-  slug: "clients/android/provider-service/create-passkey";
+"clients/android/provider-service/authenticate.md": {
+	id: "clients/android/provider-service/authenticate.md";
+  slug: "clients/android/provider-service/authenticate";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"clients/android/provider-service/get-passkey.md": {
-	id: "clients/android/provider-service/get-passkey.md";
-  slug: "clients/android/provider-service/get-passkey";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "clients/android/provider-service/introduction.mdx": {
 	id: "clients/android/provider-service/introduction.mdx";
   slug: "clients/android/provider-service/introduction";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
+"clients/android/provider-service/register.md": {
+	id: "clients/android/provider-service/register.md";
+  slug: "clients/android/provider-service/register";
+  body: string;
+  collection: "docs";
+  data: any
+} & { render(): Render[".md"] };
 "clients/android/registration.mdx": {
 	id: "clients/android/registration.mdx";
   slug: "clients/android/registration";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/browser/answer.mdx": {
 	id: "clients/browser/answer.mdx";
   slug: "clients/browser/answer";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/browser/authentication.md": {
 	id: "clients/browser/authentication.md";
   slug: "clients/browser/authentication";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "clients/browser/example.md": {
 	id: "clients/browser/example.md";
   slug: "clients/browser/example";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "clients/browser/introduction.mdx": {
 	id: "clients/browser/introduction.mdx";
   slug: "clients/browser/introduction";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/browser/offer.mdx": {
 	id: "clients/browser/offer.mdx";
   slug: "clients/browser/offer";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "clients/browser/registration.mdx": {
 	id: "clients/browser/registration.mdx";
   slug: "clients/browser/registration";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "guides/Passkey/authentication.mdx": {
 	id: "guides/Passkey/authentication.mdx";
   slug: "guides/passkey/authentication";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
+} & { render(): Render[".mdx"] };
+"guides/Passkey/extension.mdx": {
+	id: "guides/Passkey/extension.mdx";
+  slug: "guides/passkey/extension";
+  body: string;
+  collection: "docs";
+  data: any
 } & { render(): Render[".mdx"] };
 "guides/Passkey/registration.mdx": {
 	id: "guides/Passkey/registration.mdx";
   slug: "guides/passkey/registration";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "guides/Peer to Peer/answer.mdx": {
 	id: "guides/Peer to Peer/answer.mdx";
   slug: "guides/peer-to-peer/answer";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "guides/Peer to Peer/exchange.mdx": {
 	id: "guides/Peer to Peer/exchange.mdx";
   slug: "guides/peer-to-peer/exchange";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "guides/Peer to Peer/offer.mdx": {
 	id: "guides/Peer to Peer/offer.mdx";
   slug: "guides/peer-to-peer/offer";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
 "guides/components.mdx": {
 	id: "guides/components.mdx";
   slug: "guides/components";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
-"guides/concepts.md": {
-	id: "guides/concepts.md";
+"guides/concepts.mdx": {
+	id: "guides/concepts.mdx";
   slug: "guides/concepts";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+  data: any
+} & { render(): Render[".mdx"] };
 "guides/getting-started.mdx": {
 	id: "guides/getting-started.mdx";
   slug: "guides/getting-started";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".mdx"] };
-"guides/qr-code.md": {
-	id: "guides/qr-code.md";
-  slug: "guides/qr-code";
+"guides/linking.mdx": {
+	id: "guides/linking.mdx";
+  slug: "guides/linking";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+  data: any
+} & { render(): Render[".mdx"] };
 "introduction.md": {
 	id: "introduction.md";
   slug: "introduction";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "server/environment-variables.md": {
 	id: "server/environment-variables.md";
   slug: "server/environment-variables";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "server/integrations.md": {
 	id: "server/integrations.md";
   slug: "server/integrations";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "server/introduction.md": {
 	id: "server/introduction.md";
   slug: "server/introduction";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "server/running-locally.md": {
 	id: "server/running-locally.md";
   slug: "server/running-locally";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "server/tmp.md": {
 	id: "server/tmp.md";
   slug: "server/tmp";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 "server/tmp2.md": {
 	id: "server/tmp2.md";
   slug: "server/tmp2";
   body: string;
   collection: "docs";
-  data: InferEntrySchema<"docs">
+  data: any
 } & { render(): Render[".md"] };
 };
 
@@ -363,5 +370,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../src/content/config.js");
+	export type ContentConfig = never;
 }

@@ -1,0 +1,105 @@
+---
+title: "Passkey: Liquid Extension Guide"
+sidebar:
+  label: "Extension"
+---
+
+import { Aside, LinkCard } from "@astrojs/starlight/components";
+
+
+This is a [WebAuthn extension](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API/WebAuthn_extensions) that allows the service to verify the authenticity of a `KeyPair` using a `Passkey`.
+The extension is used during the [Registration](/guides/passkey/registration) and [Authentication](/guides/passkey/authentication) of Passkeys.
+
+It is the heart of operations for the `Liquid` service and is required for registration and peer-to-peer connections.
+
+### Who is this for?
+
+- **Wallets/Credential Managers** that want to adopt Liquid Auth.
+- **Ecosystems** that want to leverage the `Liquid Extension` for their networks.
+
+
+
+## 🧮 Options
+
+The service will expect the following options to be passed with the `PublicKeyCredentialCreationOptions` and `PublicKeyCredentialRequestOptions`:
+
+```javascript
+const body = {
+    //...options
+    "extensions": {
+      "liquid": true
+    }
+  }
+```
+
+This tells the service that the request is using the Liquid extension and expects to receive a `Passkey` with additional information.
+
+
+## 🧪 Handling Passkey
+
+As of this writing, currently no Authenticators support the `liquid` extension natively. The extension must be handled by the integrators
+
+If you are developing an Authenticator, you will need to handle the `liquid` extension in the `PublicKeyCredentialCreationOptions` and `PublicKeyCredentialRequestOptions`.
+
+Feel free to edit this document if you have an Authenticator that supports the `liquid` extension.
+
+
+## 🚚 Response
+
+The response message should include the extension results in the `liquid` key if it was enabled in the `Options`.
+It is mandatory to include the extension when registering new credentials with the Service.
+
+
+### ✨ Registration
+
+<Aside>Ecosystems can add custom attestation strategies to the Passkey by providing their own `type` of liquid extension</Aside>
+
+The reference implementation of the extension currently only supports the `algorand` type.
+It allows associating an Algorand address with the Passkey.
+
+```javascript
+const response = {
+    //...response from authenticator
+    "clientExtensionResults": {
+      "liquid": {
+        // Required for the extension
+        "type": "algorand",
+        // The address of the account in Algorand Encoding
+        "address": "2SPDE6XLJNXFTOO7OIGNRNKSEDOHJWVD3HBSEAPHONZQ4IQEYOGYTP6LXA",
+        // Signature of the challenge that was produced by the Service
+        "signature": "QY31mdH8AwpJ9p4pCXBO2iA5WdU-BjG52xEtJNuSJNHJIaJ10uzqk3FdR0fvYVfb_rzXTuWn4k1PFFeg-vpEDw",
+        // Optional RequestId to authenticate a remote peer
+        "requestId": "019097ff-bb8c-7514-a0c6-5209d2405a4a",
+        // Optional name for the device
+        "device": "Pixel 8 Pro"
+      }
+    }
+}
+```
+
+<LinkCard
+  title="Passkey: Registration"
+  description="Learn how to register a Passkey with the Liquid Extension."
+  href="/guides/passkey/registration"
+/>
+
+### 🎉 Authentication
+
+When using a previously registered Passkey, the client does not require the liquid extension.
+The service has attested to the additional keypair which represents an account and can rely on the WebAuthn standard for authentication.
+
+
+Although the extension is not required, it is useful for establishing a Peer-to-Peer connection.
+
+
+```javascript
+const response = {
+    //...response from authenticator
+    "clientExtensionResults": {
+      "liquid": {
+        // Optional RequestId to authenticate a remote peer
+        "requestId": "019097ff-bb8c-7514-a0c6-5209d2405a4a"
+      }
+    }
+}
+```
