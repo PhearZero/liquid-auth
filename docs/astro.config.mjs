@@ -7,8 +7,15 @@ import starlightOpenAPI, { openAPISidebarGroups } from "starlight-openapi";
 import react from "@astrojs/react";
 
 import mdx from "@astrojs/mdx";
+import basicSsl from '@vitejs/plugin-basic-ssl'
 // https://astro.build/config
 export default defineConfig({
+  vite: {
+    plugins: [basicSsl()],
+    server: {
+      https: true,
+    },
+  },
   site: 'https://liquidauth.com',
   markdown: {
     rehypePlugins: [rehypeMermaid]
@@ -22,6 +29,17 @@ export default defineConfig({
     logo: {
       src: "./public/logo.svg"
     },
+    head:[
+      {
+        tag: 'script',
+        attrs: {
+          // Tweaks to the script URL or attributes can be made here.
+          src: 'https://unpkg.com/htmx.org@1.9.6',
+          integrity: "sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni",
+          crossorigin: "anonymous",
+        },
+      },
+    ],
     editLink: {
       baseUrl: 'https://github.com/algorandfoundation/liquid-auth/edit/develop/docs/',
     },

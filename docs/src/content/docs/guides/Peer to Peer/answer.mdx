@@ -1,5 +1,5 @@
 ---
-title: "Answer Guide"
+title: "Peer: Answer Guide"
 sidebar:
     order: 21
     label: "Answer"
@@ -9,9 +9,15 @@ import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 An **Answer** is a type of session that is initiated by a client
 and is used to respond to an **Offer** from another client.
+The Answer client is responsible for presenting the [Deep Link](/guides/linking/#deep-link) to the Offer client and waiting for the response.
 
-This is usually a dApp that wants to peer with a wallet client with an Offer.
-The Answer client is responsible for presenting the QRCode to the Offer client.
+### Who is this for?
+
+- **dApps/Wallets** that want to peer with Wallets in the ecosystem.
+- **Wallets** that want to integrate deeply into `Liquid Auth` and tailor the experience.
+
+
+### Additional Links
 
 <LinkCard
   href="/guides/peer-to-peer/exchange"

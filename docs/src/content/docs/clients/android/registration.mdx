@@ -6,6 +6,8 @@ import {Aside, Tabs,  TabItem } from "@astrojs/starlight/components";
 
 Register a [Passkey](../../guides/concepts#passkeys) with the [Service](../../server/introduction)
 and attest the knowledge of a KeyPair.
+This is done by creating a new Passkey with the [liquid extension](/guides/passkey/extension) enabled.
+The extension is used to sign the challenge with an additional KeyPair as well as authenticate a remote peer.
 
 Get started by initializing the AttestationApi with an OkHttpClient and CookieJar.
 ```kotlin
@@ -15,7 +17,7 @@ val httpClient = OkHttpClient.Builder()
 val attestationApi = AttestationApi(httpClient)
 ```
 
-## User Agent
+## 👤 User Agent
 
 The User-Agent string is used to authenticate the device.
 
@@ -25,9 +27,10 @@ val userAgent = "${BuildConfig.APPLICATION_ID}/${BuildConfig.VERSION_NAME} " +
 "(Android ${Build.VERSION.RELEASE}; ${Build.MODEL}; ${Build.BRAND})"
 ```
 
-## Options
+## 🧮 Options
 
 Fetch attestation options from the service.
+The remote client should present a [Deep Link](/guides/linking/#deep-link) which contains the Origin.
 ```kotlin
 // Create Options for FIDO2 Server
 val options = JSONObject()
@@ -47,7 +50,7 @@ val response = attestationApi.postAttestationOptions(
 )
 ```
 
-## Creating
+## ✨ Creating
 
 There are several ways to handle the creation of a new Passkey.
 We recommend
@@ -124,17 +127,29 @@ attestationIntentLauncher.launch(
   </TabItem>
 </Tabs>
 
-## Response
+## 🔐 Liquid Extension
+
+Sign the challenge with an additional KeyPair and optionally authenticate a remote peer.
 
 ```kotlin
 // Create the Liquid Extension JSON
 val liquidExtJSON = JSONObject()
+// The type of signature and public key, this is also used
+// to determine the type of encoding for the user.id
 liquidExtJSON.put("type", "algorand")
-liquidExtJSON.put("requestId", msg.requestId)
+// The address of the account
 liquidExtJSON.put("address", account.address.toString())
-liquidExtJSON.put("signature", Base64.encodeBase64URLSafeString(signature!!))
+// The signature of the challenge, signed by the account
+liquidExtJSON.put("signature", Base64.encodeBase64URLSafeString(signature))
+// Optionally authenticate a remote peer
+liquidExtJSON.put("requestId", "<UUID_FROM_QR_CODE>")
+// Optional device name
 liquidExtJSON.put("device", Build.MODEL)
+```
 
+## 🚚 Response
+
+```kotlin
 val response = attestationApi.postAttestationResponse(
     origin, // Origin Server
     "User-Agent-String", // Required for checking the authenticator fingerprint

@@ -1,5 +1,5 @@
 ---
-title: "Android: Get Service Passkey"
+title: "Android 14: Authenticate"
 ---
 
 ```kotlin
@@ -8,6 +8,6 @@ val request = PendingIntentHandler.retrieveProviderCreateCredentialRequest(inten
 if (request.callingRequest is CreatePublicKeyCredentialRequest) {
     val result = viewModel.processCreatePasskey(this@CreatePasskeyActivity, request)
 } else {
-    binding.createPasskeyMessage.text = resources.getString(R.string.get_passkey_error)
+   val text = resources.getString(R.string.get_passkey_error)
 }
 ```

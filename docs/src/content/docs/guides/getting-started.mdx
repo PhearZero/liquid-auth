@@ -4,12 +4,24 @@ sidebar:
   order: 0
 pagefind: false
 ---
-import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 Liquid Auth is composed of two main components, the **Liquid Auth Server** and the **Liquid Auth Clients**.
 They are used together to provide authentication and signaling services for decentralized applications (dApps).
 
-## Quick Links
+
+## 🚀 Use Case
+
+The service should be provided by the **dApp** and the **Wallets** should act as clients.
+The **Wallet** will receive the `Origin` and `RequestId` from the `dApp` and will use it
+to authenticate with the service provided as the `Origin`.
+
+#### 📝 Requirements
+
+- **Wallets** should implement the **Offer** `SignalClient` and `WebAuthn Extension` to establish a peer-to-peer connection with the **dApp**.
+- **dApps** should implement the **Answer** `SignalClient` and host the Service.
+
+## 🔗 Quick Links
 
 <LinkCard
   title="Server"

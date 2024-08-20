@@ -14,7 +14,7 @@ val httpClient = OkHttpClient.Builder()
 val assertionApi = AssertionApi(httpClient)
 ```
 
-## User Agent
+## 👤 User Agent
 
 The User-Agent string is used to authenticate the device.
 
@@ -24,7 +24,7 @@ val userAgent = "${BuildConfig.APPLICATION_ID}/${BuildConfig.VERSION_NAME} " +
 "(Android ${Build.VERSION.RELEASE}; ${Build.MODEL}; ${Build.BRAND})"
 ```
 
-## Options
+## 🧮 Options
 
 Fetch assertion options from the service.
 ```kotlin
@@ -35,7 +35,7 @@ val response = assertionApi.postAssertionOptions(
 ).await()
 ```
 
-## Retrieving
+## 🎉 Retrieving
 
 There are several ways to handle the retrieval of an existing Passkey.
 We recommend
@@ -105,13 +105,27 @@ using the [FIDO2ApiClient](https://developers.google.com/identity/fido/android/n
   </TabItem>
 </Tabs>
 
-## Response
+## 🔐 Liquid Extension
+
+The liquid extension is optional for authentication requests.
+
+This is  useful when you already have a passkey
+and want to peer with a device that is not signed in.
+
+```kotlin
+
+val liquidExtJSON = JSONObject()
+// Optionally authenticate a remote peer
+liquidExtJSON.put("requestId", requestId)
+
+```
+
+
+## 🚚 Response
 
 ```kotlin
 // MainActivity.kt
 
-val liquidExtJSON = JSONObject()
-liquidExtJSON.put("requestId", requestId)
 
 val response = assertionApi.postAssertionResponse(
     origin, // Origin Server
