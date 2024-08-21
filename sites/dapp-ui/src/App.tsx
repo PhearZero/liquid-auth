@@ -14,7 +14,7 @@ import { Algodv2 } from 'algosdk';
 import { AlgodContext } from '@/hooks';
 import { SignalClientContext } from '@/hooks/useSignalClient.ts';
 import { LinkMessage, SignalClient } from '@algorandfoundation/liquid-client';
-import { useAddressStore } from '@/store';
+import { useAddressStore } from '@/store.ts';
 const queryClient = new QueryClient();
 
 const algod = new Algodv2(
