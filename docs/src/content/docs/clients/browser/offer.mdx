@@ -41,13 +41,63 @@ const dc = await client.peer(
 )
 ```
 
-## Data Channel[WIP]
+## Data Channel
 
-We are working on a more robust way to handle data channel messages. For now, you can use the following:
+Handling the Datachannel can be done with the `@algorandfoundation/provider` library
 
 ```typescript
-dc.onmessage = (event: MessageEvent) => {
-    console.log(event.data)
+import {encode as cborEncode, decode as cborDecode} from 'cbor-x'
+import {
+  ResponseMessageBuilder,
+  SignTransactionsResultBuilder,
+  toBase64URL,
+  fromBase64URL,
+  IARC0001Transaction,
+} from "@algorandfoundation/provider";
+
+import { randomBytes } from "tweetnacl";
+import { v7 as uuidv7 } from 'uuid';
+
+let dc: RTCDataChannel
+
+// Provider ID for your wallet
+const providerId = uuidv7()
+
+dc.onmessage = (evt: {data: string}) => {
+  const message = cborDecode(fromBase64URL(evt.data))
+  // Handle message types and create response
+
+  if(message.reference === '"arc0027:sign_transactions:request'){
+    // Make sure it's the appropriate provider
+    if(message.params.providerId !== providerId) return
+
+    const encodedTxns: IARC0001Transaction[] = message.params.txns
+
+    // Decode the transactions and add the signatures using any available method
+
+    // Fake Signature Example:
+    const stxns: string[] = [
+      // Replace with actual signatures
+      toBase64URL(randomBytes())
+    ]
+
+    // Create the Sign Transactions Result
+    const signTransactionsResult = SignTransactionsResultBuilder()
+      .addProviderId(providerId)
+      .addSignedTxns(stxns)
+      .get()
+
+    // Create the Response Message
+    const response = ResponseMessageBuilder(
+      uuidv7(), // New UUID for Response Message
+      message.id, // UUID of the Request Message
+      "arc0027:sign_transactions:response", // Reference Type of the Message
+    )
+      .addResult(signTransactionsResult)
+      .get()
+
+    // Send the Response
+    dc.send(toBase64URL(cborEncode(response)))
   }
-dc.send('Hello world!')
+}
 ```

@@ -24,16 +24,49 @@ val dc = client.peer(requestId, "offer" )
 
 ```
 
-## Data Channel[WIP]
+## Data Channel
 
-We are working on a more robust way to handle data channel messages. For now, you can use the following:
+Handling the Datachannel can be done with the `foundation.algorand.provider` library.
 
 ```kotlin
 // Example.kt
 
-// Handle Peer Messages
+// AVM Encoder
+val encoder = foundation.algorand.crypto.avm.Encoder()
+
+// Create a list of transactions that are the msgpack bytes represented as Base64URL strings
+val transactionsToSign: List<String> = createTransactions()
+
+// Crete the Params
+val params = SignTransactionsParams(
+    providerId, transactionsToSign
+)
+
+// Create the Request
+val request = RequestMessage("UUID_OF_MESSAGE", "arc0027:sign_transactions:request", params)
+
+// Send the request
+dc.send(Base64.UrlSafe.encode(request.toByteArray(EncoderType.CBOR)))
+
+// Handle Response Messages
 client.handleDataChannel(dc, {
-    Log.d(TAG, "onMessage($it)")
+    // Decode Message
+    val response = encoder.decode<ResponseMessage>(Base64.UrlSafe.decode($it), EncoderType.CBOR)
+    when (response.reference) {
+        "arc0027:sign_transactions:response" -> {
+            // Decode the Result
+            val result = encoder.decode<SignTransactionsResult>(
+                encoder.encode(message.params, EncoderType.NONE), EncoderType.NONE
+            )
+            // Process the signatures in your project,
+            // they will be keyed to the original request
+            processSignatureResult(result)
+        }
+        else -> {
+            throw IllegalArgumentException("Invalid reference: ${message.reference}")
+        }
+    }
+
 }, {
     Log.d(TAG, "onStateChange($it)")
 })

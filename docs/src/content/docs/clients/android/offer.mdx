@@ -27,15 +27,104 @@ val client = SignalClient(origin, context, httpClient)
 val dc = client.peer(requestId, "answer" )
 ```
 
-## Data Channel[WIP]
+## Data Channel
 
-We are working on a more robust way to handle data channel messages. For now, you can use the following:
+Handling the Datachannel can be done with the `foundation.algorand.provider` library.
+Wallets can implement their own Provider strategy for handling messages
+
+The following is an example of a Provider Implementation:
+
+```kotlin
+package com.example.my-wallet
+
+import com.algorand.algosdk.transaction.Transaction
+import com.algorand.algosdk.util.Encoder
+import foundation.algorand.crypto.EncoderType
+import foundation.algorand.crypto.avm.KeyPairs
+import foundation.algorand.provider.Message
+import foundation.algorand.provider.avm.models.*
+import java.security.KeyPair
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+
+
+/**
+ * A provider for the Algorand Virtual Machine (AVM).
+ * Used to test the provider.avm.models package.
+ */
+class AVMProvider(val providerId: String) {
+    val encoder = foundation.algorand.crypto.avm.Encoder()
+    // A Security KeyPair
+    var keyPair: KeyPair? = null
+    /**
+     * Handle a message from a channel
+     */
+    fun handleRequestMessage(msg: Message, keyPair: KeyPair): Any {
+        val message = encoder.decode<RequestMessage>(msg.data, msg.encoding)
+        this.keyPair = keyPair
+
+        // Handle the message references
+        when (message.reference) {
+            "arc0027:sign_transactions:request" -> {
+                val request = encoder.decode<SignTransactionsParams>(
+                    encoder.encode(message.params, EncoderType.NONE), EncoderType.NONE
+                )
+                return processSignTransactions(request)
+            }
+            else -> {
+                throw IllegalArgumentException("Invalid reference: ${message.reference}")
+            }
+        }
+    }
+    /**
+     * Decode Unsigned Transaction
+     */
+    @OptIn(ExperimentalEncodingApi::class)
+    private fun decodeUnsignedTransaction(unsignedTxn: String): Transaction? {
+        return Encoder.decodeFromMsgPack(Base64.decode(unsignedTxn), Transaction::class.java)
+    }
+    /**
+     * Process the Sign Transactions Requests
+     */
+    @OptIn(ExperimentalEncodingApi::class)
+    fun processSignTransactions(params: SignTransactionsParams): SignTransactionsResult {
+        require(params.validate())
+
+        val signedTxns = mutableListOf<String>()
+        params.txns.forEach { txn ->
+            val inst = decodeUnsignedTransaction(txn.txn!!)
+            val signature = KeyPairs.rawSignBytes(inst!!.bytesToSign(), this.keyPair!!.private)
+            signedTxns.add(Base64.UrlSafe.encode(signature!!))
+        }
+        // Create the response payload
+        return SignTransactionsResult(providerId, signedTxns)
+    }
+}
+```
+
+The following is using a Provider with the SignalClient
 
 ```kotlin
 // Example.kt
+import com.fasterxml.uuid.Generators
+import foundation.algorand.crypto.EncoderType
+import foundation.algorand.provider.Message
+import foundation.algorand.provider.avm.models.SignMessageParams
+import foundation.algorand.provider.avm.models.SignMessageResult
+import foundation.algorand.provider.avm.models.SignTransactionsResult
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+
+val provider = AVMProvider("PROVIDER_UUID")
+val keyPair = getKeypairFromSecureStore()
 
 client.handleDataChannel(dc, {
-    Log.d(TAG, "onMessage($it)")
+    // Decode the Message
+    val msg = Message(Base64.UrlSafe.decode($it), EncoderType.CBOR)
+    // Create the Result
+    val result = provider.handleRequestMessage(msg, keyPair)
+    // Send to the Response
+    dc.send(Base64.UrlSafe.encode(result.toByteArray(EncoderType.CBOR)))
 }, {
     Log.d(TAG, "onStateChange($it)")
 })
