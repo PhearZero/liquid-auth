@@ -18,7 +18,7 @@ import {
   makePaymentTxnWithSuggestedParamsFromObject,
 } from 'algosdk';
 
-import { RequestMessage, toSignTransactionsParamsRequestMessage, toBase64URL } from "@algorandfoundation/algo-models/provider";
+import { RequestMessage, toSignTransactionsParamsRequestMessage, toBase64URL } from "@algorandfoundation/provider";
 import { SignalClient } from "@algorandfoundation/liquid-client";
 import {
   attachSignedTransactionsFromResult,
