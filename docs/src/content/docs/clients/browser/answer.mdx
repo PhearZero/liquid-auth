@@ -34,17 +34,76 @@ client
 const blob = await client.qrCode()
 ```
 
-## Data Channel[WIP]
+## Data Channel
 
-We are working on a more robust way to handle data channel messages. For now, you can use the following:
+Handling the Datachannel can be done with the `@algorandfoundation/provider` library
 
 ```typescript
+import {encode as cborEncode, decode as cborDecode} from 'cbor-x';
+import {encode as msgpackEncode} from 'algorand-msgpack';
+import { v7 as uuidv7 } from 'uuid';
 
-function handleDataChannel(dc: RTCDataChannel){
-  dc.onmessage = (event: MessageEvent) => {
-      console.log(event.data)
+import {
+  RequestMessageBuilder,
+  SignTransactionsParamsBuilder,
+  toBase64URL,
+  fromBase64URL,
+} from "@algorandfoundation/provider";
+
+
+let dc: RTCDataChannel
+
+// Provider ID of the Wallet, otherwise it should be the default Liquid UUID
+const providerId = uuidv7()
+
+// Create an encoded transaction using your algorand specific library
+const txns = [
+  toBase64URL(
+    // Replace this with Encoded Transaction
+    new Uint8Array(64)
+  )
+]
+
+// UUID of the Message
+const messageId = uuidv7()
+const params = new SignTransactionsParamsBuilder()
+    .addProviderId(providerId)
+    .addTxns(txns)
+    .get()
+
+// Create the Request Message
+const request = new RequestMessageBuilder(messageId, "arc0027:sign_transactions:request")
+  .addParams(params)
+  .get()
+
+// Send the Request Message
+dc.send(toBase64URL(cborEncode(request)))
+
+// Wait for a response for the message
+dc.onmessage = async (evt: {data: string}) => {
+  const message = cborDecode(fromBase64URL(evt.data))
+  // Handle message types and create response
+
+  if(message.reference === '"arc0027:sign_transactions:response'){
+    // Make sure it's the appropriate message we are attaching the signature to
+    if(message.requestId !== messageId) return
+
+    const encodedSignatures: string[] = message.params.stxns
+
+    // Attach Signature Example:
+    const transactionsToSend: string[] = txns.map((encodedTxn, idx)=>{
+        // Getting the Transaction Bytes
+        const txnBytes = fromBase64URL(encodedTxn)
+
+        // Decode and attach the signature with the library you prefer:
+        const txn = decodeUnsignedTransaction(txnBytes)
+        return txn.attachSignature(fromBase64URL(encodedSignatures[idx]))
+    })
+
+    // Send the txns to the network:
+    for(const txn in transactionsToSend){
+      const { txId } = await algod.sendRawTransaction(txn).do();
     }
-  dc.send('Hello world!')
+  }
 }
 ```
-
