@@ -1,0 +1,104 @@
+---
+title: Extending Guide
+sidebar:
+  label: Extending
+  order: 21
+---
+
+import {Aside} from '@astrojs/starlight/components'
+
+Liquid Auth is a set of primitives that requires ecosystems to implement their own strategies.
+The primitives required to adopt the service are composed of two parts, [Authentication](#authentication) extensions and message [Providers](#providers).
+
+The Browser/Android clients do not handle signing or any cryptographic primitives.
+Their responsibilities are limited to interacting with the Service and establishing Peer to Peer connections.
+
+### Who is this for?
+
+- **Ecosystems** that want to adopt and extend `Liquid Auth` for their own purposes.
+
+
+## Authentication
+
+<Aside>Additional strategies will require contributions to the Service.</Aside>
+
+It is up to the ecosystems to decide what authentication strategy works best in their contexts.
+We have decided to use Passkeys + Proof of Private Keys.
+Other ecosystems are encouraged to develop their own strategies to be included in the reference Service.
+
+Feel free to add a [Feature Request](https://github.com/algorandfoundation/liquid-auth/issues/new/choose) or submit a [Pull Request](https://github.com/algorandfoundation/liquid-auth)
+that includes your ecosystem's authentication strategy.
+
+### Passkeys
+
+As shown in the [Extension Guide](/guides/passkey/extension/#-registration),
+the reference [Service](/server/introduction) only supports one type of authentication.
+The extension can be any additional claim that you wish the Passkey to represent.
+
+In the case of Algorand, this is proving the ownership of a private key along with the proof of a Passkey.
+We include an optional `requestId` which can be used to authenticate a remote session and join them to the user's channel.
+The following illustrates a Passkey with the additional Algorand focused attestation:
+
+```json add={7-11}
+{
+    "id": "AYMPi2Rbhcnu2gSHOO1TNvzDJ38iU00rrlCqyH874XCIEoIotRc7eVRFpx0TvsQurg7BAnXy5KnWdKC8LeWs0k0",
+    "type": "public-key",
+    "rawId": "AYMPi2Rbhcnu2gSHOO1TNvzDJ38iU00rrlCqyH874XCIEoIotRc7eVRFpx0TvsQurg7BAnXy5KnWdKC8LeWs0k0",
+    "clientExtensionResults": {
+      "liquid": {
+        "type": "algorand",
+        "requestId": "019097ff-bb8c-7514-a0c6-5209d2405a4a",
+        "address": "2SPDE6XLJNXFTOO7OIGNRNKSEDOHJWVD3HBSEAPHONZQ4IQEYOGYTP6LXA",
+        "signature": "QY31mdH8AwpJ9p4pCXBO2iA5WdU-BjG52xEtJNuSJNHJIaJ10uzqk3FdR0fvYVfb_rzXTuWn4k1PFFeg-vpEDw",
+        "device": "Pixel 8 Pro"
+      }
+    },
+    "response": {
+      "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiMzVKWXBvWEduTTRzOElJQ2FrV1NMbGxjWHkzWl9sYzNBYUxTbDg3MnFYTSIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOlI4eE83cmxRV2FXTDRCbEZ5Z3B0V1JiNXFjS1dkZmp6WklhU1JpdDlYVnciLCJhbmRyb2lkUGFja2FnZU5hbWUiOiJmb3VuZGF0aW9uLmFsZ29yYW5kLmRlbW8ifQ",
+      "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVjFlpPmT7RcYTDeFJdKhDtiKwzb05n-ojlcqqYw5SomXZBFAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQGDD4tkW4XJ7toEhzjtUzb8wyd_IlNNK65Qqsh_O-FwiBKCKLUXO3lURacdE77ELq4OwQJ18uSp1nSgvC3lrNJNpQECAyYgASFYIB2dcp3wanhReRhgRIpJCUfRSwkCvyE9OdvEL_NlncSJIlggkSIz7h7O5nrAXGJrkCOmeolChSc09eHzniCFLFxaKH0"
+    }
+  }
+```
+
+Custom attestation strategies can be as simple or complex as required.
+The main focus is a unique identifier of the user and the optional RequestId for authenticating a remote peer.
+
+```json add={8-9}
+{
+    "clientExtensionResults": {
+      "liquid": {
+        "type": "addition",
+        "a":  1,
+        "b": 2,
+        "sum": 3,
+        "address": "Unique Identifier for the User",
+        "requestId": "REMOTE_UUID_REQUEST_ID"
+      }
+    },
+    ...
+  }
+```
+
+## Providers
+
+<Aside>This does not require any additional contributions to the Service or Clients.</Aside>
+
+One of the main features of the Liquid Extension and Service is the ability to create Peer to Peer connections.
+This feature is guarded by the authentication mechanism, both peers must be authenticated prior to establishing a peer connection.
+
+The protocol does not specify what should go over the wire and ecosystems are required to adopt their own
+strategies for handling messages.
+Once the client is connected, you will receive the datachannel and can apply any strategies between the peers
+
+```javascript
+client
+    .peer("UUID_FOR_REMOTE_AUTH", 'offer')
+    .then((dc)=>{
+      dc.onmessage = (e) => {
+          // Handle Ecosystem Messages
+      }
+      // Handle Creation of Ecosystem Messages
+      dc.send()
+    })
+
+```
