@@ -5,8 +5,8 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'node:path';
 
-const DEFAULT_PROXY_URL = 'http://localhost:3000';
-const DEFAULT_WSS_PROXY_URL = 'ws://localhost:3000';
+const DEFAULT_PROXY_URL = 'http://192.168.1.17:5173';
+const DEFAULT_WSS_PROXY_URL = 'ws://192.168.1.17:5173';
 
 export default defineConfig({
   server: {
@@ -27,7 +27,8 @@ export default defineConfig({
       '@/components': resolve(__dirname, 'src', 'components'),
       '@/hooks': resolve(__dirname, 'src', 'hooks'),
       '@/pages': resolve(__dirname, 'src', 'pages'),
-      '@/store': resolve(__dirname, 'src', 'store'),
+      '@/store.ts': resolve(__dirname, 'src', 'store.ts'),
+      '@/lib': resolve(__dirname, 'src', 'lib'),
     },
   },
   plugins: [
@@ -85,7 +86,7 @@ export default defineConfig({
         ],
       },
     }),
-    splitVendorChunkPlugin(),
+    // splitVendorChunkPlugin(),
     ViteImageOptimizer(),
     react(),
   ],
